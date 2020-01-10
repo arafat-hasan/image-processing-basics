@@ -43,7 +43,7 @@ if __name__ == '__main__':
     imgGraygen = np.zeros((rows, cols), dtype='uint8')
     imgGrayweighted = np.zeros((rows, cols), dtype='uint8')
     imgBinary = np.zeros((rows, cols), dtype='bool_')
-    thresh = 127
+    thresh = 170
 
     for row in range(rows):
         for col in range(cols):
