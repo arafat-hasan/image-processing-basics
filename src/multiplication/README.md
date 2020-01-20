@@ -1,3 +1,3 @@
 # Multiplication of two images
 
-![image-addition](../../imgOut/multiply.png)
+![Multiplication of two images](../../imgOut/multiply.png)

@@ -1,3 +1,3 @@
 # Log transformation of an image
 
-![image-addition](../../imgOut/log-transformation.png)
+![Log transformation of an image](../../imgOut/log-transformation.png)

@@ -1,3 +1,3 @@
 # Average filter applying on image
 
-![image-addition](../../imgOut/average-filter.png)
+![Average filter applying on image](../../imgOut/average-filter.png)

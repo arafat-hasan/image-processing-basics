@@ -1,3 +1,3 @@
 # Morphological transformation
 
-![image-addition](../../imgOut/morphological-transformation.png)
+![Morphological transformation](../../imgOut/morphological-transformations.png)

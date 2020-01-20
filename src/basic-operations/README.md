@@ -1,3 +1,3 @@
-# Basic image operation
+# Basic image operations
 
-![image-addition](../../imgOut/NewHouseImage.png)
+![Basic image operations](../../imgOut/NewHouseImage.png)

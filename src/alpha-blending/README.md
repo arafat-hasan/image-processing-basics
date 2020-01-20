@@ -1,3 +1,3 @@
 # Alpha blending
 
-![image-addition](../../imgOut/alpha-blending.png)
+![Alpha blending](../../imgOut/alpha-blending.png)

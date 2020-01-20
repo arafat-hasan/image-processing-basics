@@ -1,3 +1,3 @@
 # Use of weber ratio
 
-![image-addition](../../imgOut/weber-ratio.png)
+![Use of weber ratio](../../imgOut/weber-ratio.png)

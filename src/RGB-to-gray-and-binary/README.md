@@ -1,3 +1,3 @@
 # RGB to gray and binary conversion
 
-![image-addition](../../imgOut/RGB-to-gray-and-binary.png)
+![RGB to gray and binary conversion](../../imgOut/RGB-to-gray-and-binary.png)

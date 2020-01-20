@@ -1,3 +1,3 @@
 # Image contrast calculation and change
 
-![image-addition](../../imgOut/contrast.png)
+![Image contrast calculation and change](../../imgOut/contrast.png)

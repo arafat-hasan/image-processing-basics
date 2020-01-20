@@ -1,3 +1,3 @@
 # Division of two images
 
-![image-addition](../../imgOut/division.png)
+![Division of two images](../../imgOut/division.png)

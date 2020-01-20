@@ -1,3 +1,3 @@
 # Ringing artifacts
 
-![image-addition](../../imgOut/ringing-artifacts.png)
+![Ringing artifacts](../../imgOut/ringing-artifacts.png)

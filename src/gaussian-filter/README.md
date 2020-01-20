@@ -1,3 +1,3 @@
 # Apply Gaussian filter on an image
 
-![image-addition](../../imgOut/gaussian-filter.png)
+![Apply Gaussian filter on an image](../../imgOut/gaussian-filter.png)
