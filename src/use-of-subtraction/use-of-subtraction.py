@@ -57,7 +57,7 @@ if __name__ == '__main__':
             tmp = int(img1[row, col]) - int(img2[row, col])
             output[row, col] = max(0, min(tmp, 255))
 
-    titles = ['First Input Igmage', 'Second Input Image', 'Output Image']
+    titles = ['First Input Image', 'Second Input Image', 'Output Image']
     imgarr = [img1, img2, output]
     for i in range(3):
         plt.subplot(1, 3, i+1)
