@@ -327,7 +327,7 @@ def anisodiff(img,
             ih.set_data(imgout)
             ax2.set_title(iterstring)
             fig.canvas.draw()
-            # sleep(0.01)
+            sleep(0.01)
             # print('ploton workded twice')
 
     return imgout
@@ -348,6 +348,7 @@ s = np.std(img)
 nimg = (img - m) / s
 # # plt.imshow(nimg)
 # # plt.colorbar()
+
 '''
 	Arguments:
 	        img    - input image
@@ -414,5 +415,4 @@ fimg = anisodiff(nimg, 50, 80, 0.075, (1, 1), 2.5, ploton=True)
 # plt.figure(figsize=(16,9))
 # plt.imshow(fimg-gimg)
 
-plt.show()
 # cv2.waitKey(0)
