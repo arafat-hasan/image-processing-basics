@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import cv2
 
-# fig = plt.figure()
+fig = plt.figure()
 
 ims = []
 

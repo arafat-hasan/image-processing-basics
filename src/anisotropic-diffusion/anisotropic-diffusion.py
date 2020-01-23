@@ -27,6 +27,7 @@ import cv2
 import matplotlib.pyplot as plt
 import skimage.io as io
 import skimage.filters as flt
+import matplotlib.animation as animation
 
 # since we can't use imports
 # import numpy as np
@@ -181,14 +182,6 @@ def anisodiff3(stack,
     return stackout
 
 
-def anisodiff(img,
-              niter=1,
-              kappa=50,
-              gamma=0.1,
-              step=(1., 1.),
-              sigma=0,
-              option=1,
-              ploton=False):
     """
 	Anisotropic diffusion.
 
@@ -244,6 +237,16 @@ def anisodiff(img,
 	July 2012 translated to Python
 	"""
 
+def anisodiff(img,
+              niter=1,
+              kappa=50,
+              gamma=0.1,
+              step=(1., 1.),
+              sigma=0,
+              option=1,
+              niterlist=[]
+              ):
+
     # ...you could always diffuse each color channel independently if you
     # really want
     if img.ndim == 3:
@@ -262,22 +265,15 @@ def anisodiff(img,
     gS = np.ones_like(imgout)
     gE = gS.copy()
 
-    print('ploton: ', ploton)
-    # create the plot figure, if requested
-    if ploton:
-        import pylab as pl
-        from time import sleep
 
-        fig = pl.figure(figsize=(20, 5.5), num="Anisotropic diffusion")
-        ax1, ax2 = fig.add_subplot(1, 2, 1), fig.add_subplot(1, 2, 2)
+    imgoutarr = {}
+    last = 0
+    niterlist.sort()
 
-        ax1.imshow(img, interpolation='nearest')
-        ih = ax2.imshow(imgout, interpolation='nearest', animated=True)
-        ax1.set_title("Original image")
-        ax2.set_title("Iteration 0")
 
-        fig.canvas.draw()
-        # print('ploton worked')
+    if len(niterlist) != 0 and niterlist[0] == 0:
+       imgoutarr[0] = imgout.copy()
+       last = last + 1
 
     for ii in np.arange(1, niter):
 
@@ -322,15 +318,13 @@ def anisodiff(img,
         # update the image
         imgout += gamma * (NS + EW)
 
-        if ploton:
-            iterstring = "Iteration %i" % (ii + 1)
-            ih.set_data(imgout)
-            ax2.set_title(iterstring)
-            fig.canvas.draw()
-            sleep(0.01)
-            # print('ploton workded twice')
+        
+        if last <= len(niterlist) and ii == niterlist[last]:
+            imgoutarr[ii] = imgout.copy()
+            last = last + 1
 
-    return imgout
+    imgoutarr[niter] = imgout
+    return imgoutarr
 
 
 path = "../../img/Valve_original_(1).png"
@@ -341,7 +335,7 @@ print(img.shape)
 # plt.imshow(img)
 # plt.imshow(img)
 # plt.imshow(img2)
-img = img.astype(float)
+img = img.astype('float32')
 # img=img[300:600,300:600]
 m = np.mean(img)
 s = np.std(img)
@@ -365,7 +359,53 @@ nimg = (img - m) / s
 '''
 
 # plt.figure(figsize=(16, 9))
-fimg = anisodiff(nimg, 50, 80, 0.075, (1, 1), 2.5, ploton=True)
+niterlist = range(0, 100)
+fimg = anisodiff(img=nimg, niter=100, kappa=80, gamma=0.075, step=(1, 1), option=1, niterlist=niterlist)
+
+fig = plt.figure("ArtistAnimation")
+ax = fig.add_subplot(111)
+
+ims = []
+
+for iternum in niterlist:
+    title = plt.text(0.5,
+                     1.01,
+                     str(iternum),
+                     ha="center",
+                     va="bottom",
+                     color=[1, 0, 0],
+                     transform=ax.transAxes,
+                     fontsize="large")
+    # text = ax.text(iternum, iternum, titles[iternum])
+    scatter = ax.imshow(fimg[iternum], cmap='gray')
+    ims.append([
+        # text,
+        scatter,
+        title,
+    ])
+
+ani = animation.ArtistAnimation(fig,
+                                ims,
+                                interval=250,
+                                blit=False,
+                                repeat_delay=0)
+plt.show()
+# for i in range(6):
+#     plt.subplot(3, 3, i + 1)
+#     plt.imshow(fimg[itm[i]], cmap='gray')
+#     plt.title(str(itm[i])+": "+str(np.mean(fimg[itm[i]])))
+#     plt.xticks([])
+#     plt.yticks([])
+
+
+# plt.subplot(3, 3, 7)
+# plt.imshow(nimg, cmap='gray')
+# plt.title("org"+": "+str(np.mean(nimg)))
+# plt.xticks([])
+# plt.yticks([])
+
+
+plt.show()
 # plt.subplot(1, 1, 1)
 # plt.imshow(fimg, cmap='gray')
 # plt.subplot(2, 3, 1)
