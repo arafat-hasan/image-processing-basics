@@ -5,13 +5,30 @@
 #
 # @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
 #
+#           Original MATLAB code by Peter Kovesi
+#           School of Computer Science & Software Engineering
+#           The University of Western Australia
+#           pk @ csse uwa edu au
+#           <http://www.csse.uwa.edu.au>
+#
+#           Translated to Python and optimised by Alistair Muldal
+#           Department of Pharmacology
+#           University of Oxford
+#           <alistair.muldal@pharm.ox.ac.uk>
+#
+#           More dynamic python code by Arafat Hasan
+#           Department of Computer Science and Engineering
+#           Mawlana Bhashani Science and Technology
+#           Tanggail-1902, Bangladesh
+#           <opendoor.arafata[at]gmail[dot]com>
+#
 # DATE CREATED: 21-01-20 21:55:31 (+06)
-# LAST MODIFIED: 21-01-20 21:55:47 (+06)
+# LAST MODIFIED: 24-01-20 19:22:12 (+06)
 #
 # DEVELOPMENT HISTORY:
 # Date         Version     Description
 # --------------------------------------------------------------------
-# 21-01-20     1.0         Deleted code is debugged code.
+# 21-01-20     1.0         Dynamic and more usable code
 #
 #               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
 #              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -28,10 +45,7 @@ import matplotlib.pyplot as plt
 import skimage.io as io
 import skimage.filters as flt
 import matplotlib.animation as animation
-
-# since we can't use imports
-# import numpy as np
-# import scipy.ndimage.filters as flt
+from collections import Counter
 import warnings
 
 
@@ -182,6 +196,13 @@ def anisodiff3(stack,
     return stackout
 
 
+def anisodiff(img,
+              niterlist=[1],
+              kappa=50,
+              gamma=0.1,
+              step=(1., 1.),
+              sigma=0,
+              option=1):
     """
 	Anisotropic diffusion.
 
@@ -189,14 +210,13 @@ def anisodiff3(stack,
 	imgout = anisodiff(im, niter, kappa, gamma, option)
 
 	Arguments:
-	        img    - input image
-	        niter  - number of iterations
-	        kappa  - conduction coefficient 20-100 ?
-	        gamma  - max value of .25 for stability
-	        step   - tuple, the distance between adjacent pixels in (y,x)
-	        option - 1 Perona Malik diffusion equation No 1
-	                 2 Perona Malik diffusion equation No 2
-	        ploton - if True, the image will be plotted on every iteration
+	        img       - input image
+	        niterlist - if True, the image will be plotted on every iteration
+	        kappa     - conduction coefficient 20-100 ?
+	        gamma     - max value of .25 for stability
+	        step      - tuple, the distance between adjacent pixels in (y,x)
+	        option    - 1 Perona Malik diffusion equation No 1
+	                    2 Perona Malik diffusion equation No 2
 
 	Returns:
 	        imgout   - diffused image.
@@ -232,20 +252,19 @@ def anisodiff3(stack,
 	University of Oxford
 	<alistair.muldal@pharm.ox.ac.uk>
 
+
+        More dynamic python code by Arafat Hasan
+        Department of Computer Science and Engineering
+        Mawlana Bhashani Science and Technology
+        Tanggail-1902, Bangladesh
+        <opendoor.arafata[at]gmail[dot]com>
+    
 	June 2000  original version.       
 	March 2002 corrected diffusion eqn No 2.
 	July 2012 translated to Python
-	"""
+        January 2020, dynamic python
 
-def anisodiff(img,
-              niter=1,
-              kappa=50,
-              gamma=0.1,
-              step=(1., 1.),
-              sigma=0,
-              option=1,
-              niterlist=[]
-              ):
+	"""
 
     # ...you could always diffuse each color channel independently if you
     # really want
@@ -265,15 +284,14 @@ def anisodiff(img,
     gS = np.ones_like(imgout)
     gE = gS.copy()
 
-
     imgoutarr = {}
     last = 0
     niterlist.sort()
-
+    niter = niterlist[len(niterlist) - 1]
 
     if len(niterlist) != 0 and niterlist[0] == 0:
-       imgoutarr[0] = imgout.copy()
-       last = last + 1
+        imgoutarr[0] = imgout.copy()
+        last = last + 1
 
     for ii in np.arange(1, niter):
 
@@ -318,7 +336,6 @@ def anisodiff(img,
         # update the image
         imgout += gamma * (NS + EW)
 
-        
         if last <= len(niterlist) and ii == niterlist[last]:
             imgoutarr[ii] = imgout.copy()
             last = last + 1
@@ -327,132 +344,217 @@ def anisodiff(img,
     return imgoutarr
 
 
-path = "../../img/Valve_original_(1).png"
-# path = "../../img/QBI Image Enhancement/scroll.tif"
-img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-
-print(img.shape)
-# plt.imshow(img)
-# plt.imshow(img)
-# plt.imshow(img2)
-img = img.astype('float32')
-# img=img[300:600,300:600]
-m = np.mean(img)
-s = np.std(img)
-nimg = (img - m) / s
-# # plt.imshow(nimg)
-# # plt.colorbar()
-
-'''
-	Arguments:
-	        img    - input image
-	        niter  - number of iterations
-	        kappa  - conduction coefficient 20-100 ?
-	        gamma  - max value of .25 for stability
-	        step   - tuple, the distance between adjacent pixels in (y,x)
-	        option - 1 Perona Malik diffusion equation No 1
-	                 2 Perona Malik diffusion equation No 2
-	        ploton - if True, the image will be plotted on every iteration
-
-	Returns:
-	        imgout   - diffused image.
-'''
-
-# plt.figure(figsize=(16, 9))
-niterlist = range(0, 100)
-fimg = anisodiff(img=nimg, niter=100, kappa=80, gamma=0.075, step=(1, 1), option=1, niterlist=niterlist)
-
-fig = plt.figure("ArtistAnimation")
-ax = fig.add_subplot(111)
-
-ims = []
-
-for iternum in niterlist:
-    title = plt.text(0.5,
-                     1.01,
-                     str(iternum),
-                     ha="center",
-                     va="bottom",
-                     color=[1, 0, 0],
-                     transform=ax.transAxes,
-                     fontsize="large")
-    # text = ax.text(iternum, iternum, titles[iternum])
-    scatter = ax.imshow(fimg[iternum], cmap='gray')
-    ims.append([
-        # text,
-        scatter,
-        title,
-    ])
-
-ani = animation.ArtistAnimation(fig,
-                                ims,
-                                interval=250,
-                                blit=False,
-                                repeat_delay=0)
-plt.show()
-# for i in range(6):
-#     plt.subplot(3, 3, i + 1)
-#     plt.imshow(fimg[itm[i]], cmap='gray')
-#     plt.title(str(itm[i])+": "+str(np.mean(fimg[itm[i]])))
-#     plt.xticks([])
-#     plt.yticks([])
+def prewittOnDic(imgdic={}):
+    prewittKernelX = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
+    prewittKernelY = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
+    prewittX = {
+        key: cv2.filter2D(value, -1, prewittKernelX)
+        for key, value in imgdic.items()
+    }
+    prewittY = {
+        key: cv2.filter2D(value, -1, prewittKernelY)
+        for key, value in imgdic.items()
+    }
+    prewittlst = dict(prewittX.items() + prewittY.items() +
+                      [(k, prewittX[k] + prewittY[k])
+                       for k in set(prewittY) & set(prewittX)])
+    return prewittlst
 
 
-# plt.subplot(3, 3, 7)
-# plt.imshow(nimg, cmap='gray')
-# plt.title("org"+": "+str(np.mean(nimg)))
-# plt.xticks([])
-# plt.yticks([])
+def sobelOnDic(imgdic={}):
+    sobelX = {
+        key: cv2.Sobel(value, cv2.CV_8U, 1, 0, ksize=3)
+        for key, value in imgdic.items()
+    }
+    sobelY = {
+        key: cv2.Sobel(value, cv2.CV_8U, 0, 1, ksize=3)
+        for key, value in imgdic.items()
+    }
+    sobellst = dict(sobelX.items() + sobelY.items() +
+                    [(k, sobelX[k] + sobelY[k])
+                     for k in set(sobelY) & set(sobelX)])
+    return sobellst
 
 
-plt.show()
-# plt.subplot(1, 1, 1)
-# plt.imshow(fimg, cmap='gray')
-# plt.subplot(2, 3, 1)
-# plt.imshow(nimg, cmap='gray')
-# plt.title('Original')
+if __name__ == '__main__':
+    path = "../../img/Valve_original_(1).png"
+    img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
-# plt.subplot(2, 3, 2)
-# plt.imshow(fimg, cmap='gray', vmin=-1, vmax=1)
-# #plt.imshow(fimg)
-# plt.title('Filtered')
+    img = img.astype('float32')
+    # img=img[300:600,300:600]
+    # m = np.mean(img)
+    # s = np.std(img)
+    # nimg = (img - m) / s
 
-# plt.subplot(2, 3, 3)
-# plt.imshow(fimg - nimg, cmap='gray')
-# plt.title('Difference')
+    nimg = img.copy()
 
-# plt.subplot(2, 3, 4)
-# h = np.histogram(nimg, 100)
-# plt.plot(h[0])
+    niterlist = [0, 20, 40, 60, 80, 100]
+    ksizelist = [3, 5, 7, 9, 11]
 
-# plt.subplot(2, 3, 5)
-# h, ax = np.histogram(fimg, 100)
+    gaussianblurlst = {
+        ksize: cv2.GaussianBlur(img, (ksize, ksize), cv2.BORDER_DEFAULT)
+        for ksize in ksizelist
+    }
+    ksizelist.append(0)
+    ksizelist.sort()
+    gaussianblurlst[0] = img
 
-# plt.plot(ax[0:(np.size(h))], h)
+    anisodifflst = anisodiff(img=nimg,
+                             niterlist=niterlist,
+                             kappa=80,
+                             gamma=0.075,
+                             step=(1, 1),
+                             option=2)
 
-# plt.figure(figsize=(16,9))
-# # gimg=flt.gaussian_filter(nimg,5)
-# gimg=flt.gaussian(nimg,5)
-# plt.subplot(2,3,1)
-# plt.imshow(nimg)
-# plt.title('Original')
-# plt.subplot(2,3,2)
-# plt.imshow(gimg,vmin=-0.8,vmax=0.8)
-# plt.title('Gauss Filtered')
-# plt.subplot(2,3,3)
-# plt.imshow(gimg-nimg)
-# plt.title('Difference')
+    cannyGAUlst = {
+        key: cv2.Canny(np.uint8(value), 100, 200)
+        for key, value in gaussianblurlst.items()
+    }
+    prewittGAUlst = prewittOnDic(gaussianblurlst)
+    sobelGAUlst = sobelOnDic(gaussianblurlst)
 
-# plt.subplot(2,3,4)
-# h=np.histogram(nimg,100)
-# plt.plot(h[0])
+    cannyANIlst = {
+        key: cv2.Canny(np.uint8(value), 100, 200)
+        for key, value in anisodifflst.items()
+    }
+    prewittANIlst = prewittOnDic(anisodifflst)
+    sobelANIlst = sobelOnDic(anisodifflst)
 
-# plt.subplot(2,3,5)
-# h,ax=np.histogram(gimg,100)
+    fig = plt.figure("ArtistAnimation")
 
-# plt.plot(ax[0:(np.size(h))],h)
+    axGau = fig.add_subplot(241)
+    axGAUCanny = fig.add_subplot(242)
+    axGAUPrewitt = fig.add_subplot(243)
+    axGAUSobel = fig.add_subplot(244)
 
-# plt.figure(figsize=(16,9))
-# plt.imshow(fimg-gimg)
+    axAniDiff = fig.add_subplot(245)
+    axANICanny = fig.add_subplot(246)
+    axANIPrewitt = fig.add_subplot(247)
+    axANISobel = fig.add_subplot(248)
+    plt.subplots_adjust(left=.05,
+                        bottom=0,
+                        right=.95,
+                        top=1,
+                        wspace=.13,
+                        hspace=None)
 
-# cv2.waitKey(0)
+    ims = []
+
+    for iternum in range(6):
+
+        titleGau = plt.text(0.5,
+                            1.01,
+                            "Gaussian, ksize: " + str(ksizelist[iternum]) +
+                            "*" + str(ksizelist[iternum]),
+                            ha="center",
+                            va="bottom",
+                            color=[1, 0, 0],
+                            transform=axGau.transAxes,
+                            fontsize="large")
+
+        titleGAUCanny = plt.text(0.5,
+                                 1.01,
+                                 "Canny, ksize: " + str(ksizelist[iternum]) +
+                                 "*" + str(ksizelist[iternum]),
+                                 ha="center",
+                                 va="bottom",
+                                 color=[1, 0, 0],
+                                 transform=axGAUCanny.transAxes,
+                                 fontsize="large")
+
+        titleGAUPrewitt = plt.text(0.5,
+                                   1.01,
+                                   "Prewitt, ksize: " +
+                                   str(ksizelist[iternum]) + "*" +
+                                   str(ksizelist[iternum]),
+                                   ha="center",
+                                   va="bottom",
+                                   color=[1, 0, 0],
+                                   transform=axGAUPrewitt.transAxes,
+                                   fontsize="large")
+
+        titleGAUSobel = plt.text(0.5,
+                                 1.01,
+                                 "Sobel, ksize: " + str(ksizelist[iternum]) +
+                                 "*" + str(ksizelist[iternum]),
+                                 ha="center",
+                                 va="bottom",
+                                 color=[1, 0, 0],
+                                 transform=axGAUSobel.transAxes,
+                                 fontsize="large")
+
+        titleAniDiff = plt.text(0.5,
+                                1.01,
+                                "AnisoDiff, iteration: " +
+                                str(niterlist[iternum]),
+                                ha="center",
+                                va="bottom",
+                                color=[1, 0, 0],
+                                transform=axAniDiff.transAxes,
+                                fontsize="large")
+
+        titleANICanny = plt.text(0.5,
+                                 1.01,
+                                 "Canny, iteration: " + str(niterlist[iternum]),
+                                 ha="center",
+                                 va="bottom",
+                                 color=[1, 0, 0],
+                                 transform=axANICanny.transAxes,
+                                 fontsize="large")
+
+        titleANIPrewitt = plt.text(0.5,
+                                   1.01,
+                                   "Prewitt, iteration: " +
+                                   str(niterlist[iternum]),
+                                   ha="center",
+                                   va="bottom",
+                                   color=[1, 0, 0],
+                                   transform=axANIPrewitt.transAxes,
+                                   fontsize="large")
+
+        titleANISobel = plt.text(0.5,
+                                 1.01,
+                                 "Sobel, iteration: " + str(niterlist[iternum]),
+                                 ha="center",
+                                 va="bottom",
+                                 color=[1, 0, 0],
+                                 transform=axANISobel.transAxes,
+                                 fontsize="large")
+
+        showGau = axGau.imshow(gaussianblurlst[ksizelist[iternum]], cmap='gray')
+
+        showGAUCanny = axGAUCanny.imshow(cannyGAUlst[ksizelist[iternum]],
+                                         cmap='gray')
+
+        showGAUPrewitt = axGAUPrewitt.imshow(prewittGAUlst[ksizelist[iternum]],
+                                             cmap='gray')
+
+        showGAUSobel = axGAUSobel.imshow(sobelGAUlst[ksizelist[iternum]],
+                                         cmap='gray')
+
+        showAniDiff = axAniDiff.imshow(anisodifflst[niterlist[iternum]],
+                                       cmap='gray')
+
+        showANICanny = axANICanny.imshow(cannyANIlst[niterlist[iternum]],
+                                         cmap='gray')
+
+        showANIPrewitt = axANIPrewitt.imshow(prewittANIlst[niterlist[iternum]],
+                                             cmap='gray')
+
+        showANISobel = axANISobel.imshow(sobelANIlst[niterlist[iternum]],
+                                         cmap='gray')
+
+        ims.append([
+            showGau, titleGau, showGAUCanny, titleGAUCanny, showGAUPrewitt,
+            titleGAUPrewitt, showGAUSobel, titleGAUSobel, showAniDiff,
+            titleAniDiff, showANICanny, titleANICanny, showANIPrewitt,
+            titleANIPrewitt, showANISobel, titleANISobel
+        ])
+
+    ani = animation.ArtistAnimation(fig,
+                                    ims,
+                                    interval=1000,
+                                    blit=False,
+                                    repeat_delay=0)
+
+    plt.show()
