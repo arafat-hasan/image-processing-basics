@@ -420,7 +420,7 @@ if __name__ == '__main__':
     prewittANIlst = prewittOnDic(anisodifflst)
     sobelANIlst = sobelOnDic(anisodifflst)
 
-    fig = plt.figure("ArtistAnimation")
+    fig = plt.figure("Compare Anisotropic Diffusion and Gaussian filter")
 
     axGau = fig.add_subplot(241)
     axGAUCanny = fig.add_subplot(242)
@@ -437,6 +437,25 @@ if __name__ == '__main__':
                         top=1,
                         wspace=.13,
                         hspace=None)
+
+    axGau.annotate("Gaussian",
+                   xy=(0, 0.5),
+                   xytext=(-axGau.yaxis.labelpad - 5, 0),
+                   xycoords=axGau.yaxis.label,
+                   textcoords='offset points',
+                   size='large',
+                   ha='right',
+                   va='center',
+                   rotation=90)
+    axAniDiff.annotate("Anisotropic Diffusion",
+                       xy=(0, 0.5),
+                       xytext=(-axAniDiff.yaxis.labelpad - 5, 0),
+                       xycoords=axAniDiff.yaxis.label,
+                       textcoords='offset points',
+                       size='large',
+                       ha='right',
+                       va='center',
+                       rotation=90)
 
     ims = []
 
@@ -553,7 +572,7 @@ if __name__ == '__main__':
 
     ani = animation.ArtistAnimation(fig,
                                     ims,
-                                    interval=1000,
+                                    interval=2000,
                                     blit=False,
                                     repeat_delay=0)
 
