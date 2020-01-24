@@ -401,7 +401,7 @@ if __name__ == '__main__':
 
     anisodifflst = anisodiff(img=nimg,
                              niterlist=niterlist,
-                             kappa=80,
+                             kappa=30,
                              gamma=0.075,
                              step=(1, 1),
                              option=2)
