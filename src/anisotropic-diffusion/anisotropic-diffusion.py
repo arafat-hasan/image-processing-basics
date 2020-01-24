@@ -381,7 +381,7 @@ if __name__ == '__main__':
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
     img = img.astype('float32')
-    # img=img[300:600,300:600]
+    img = img[0:480, 60:540]
     # m = np.mean(img)
     # s = np.std(img)
     # nimg = (img - m) / s
@@ -420,7 +420,11 @@ if __name__ == '__main__':
     prewittANIlst = prewittOnDic(anisodifflst)
     sobelANIlst = sobelOnDic(anisodifflst)
 
-    fig = plt.figure("Compare Anisotropic Diffusion and Gaussian filter")
+    fig = plt.figure("Compare Anisotropic Diffusion and Gaussian filter",
+                     figsize=(10, 6),
+                     dpi=192,
+                     facecolor='w',
+                     edgecolor='k')
 
     axGau = fig.add_subplot(241)
     axGAUCanny = fig.add_subplot(242)
@@ -431,6 +435,25 @@ if __name__ == '__main__':
     axANICanny = fig.add_subplot(246)
     axANIPrewitt = fig.add_subplot(247)
     axANISobel = fig.add_subplot(248)
+
+    axGau.set_xticks([])
+    axGAUCanny.set_xticks([])
+    axGAUPrewitt.set_xticks([])
+    axGAUSobel.set_xticks([])
+    axAniDiff.set_xticks([])
+    axANICanny.set_xticks([]) 
+    axANIPrewitt.set_xticks([])
+    axANISobel.set_xticks([])
+
+    axGau.set_yticks([])
+    axGAUCanny.set_yticks([])
+    axGAUPrewitt.set_yticks([])
+    axGAUSobel.set_yticks([])
+    axAniDiff.set_yticks([])
+    axANICanny.set_yticks([]) 
+    axANIPrewitt.set_yticks([])
+    axANISobel.set_yticks([])
+
     plt.subplots_adjust(left=.05,
                         bottom=0,
                         right=.95,
@@ -459,6 +482,7 @@ if __name__ == '__main__':
 
     ims = []
 
+
     for iternum in range(6):
 
         titleGau = plt.text(0.5,
@@ -467,9 +491,9 @@ if __name__ == '__main__':
                             "*" + str(ksizelist[iternum]),
                             ha="center",
                             va="bottom",
-                            color=[1, 0, 0],
+                            color=[.3, .3, .3],
                             transform=axGau.transAxes,
-                            fontsize="large")
+                            fontsize="smaller")
 
         titleGAUCanny = plt.text(0.5,
                                  1.01,
@@ -477,9 +501,9 @@ if __name__ == '__main__':
                                  "*" + str(ksizelist[iternum]),
                                  ha="center",
                                  va="bottom",
-                                 color=[1, 0, 0],
+                                 color=[.3, .3, .3],
                                  transform=axGAUCanny.transAxes,
-                                 fontsize="large")
+                                 fontsize="smaller")
 
         titleGAUPrewitt = plt.text(0.5,
                                    1.01,
@@ -488,9 +512,9 @@ if __name__ == '__main__':
                                    str(ksizelist[iternum]),
                                    ha="center",
                                    va="bottom",
-                                   color=[1, 0, 0],
+                                   color=[.3, .3, .3],
                                    transform=axGAUPrewitt.transAxes,
-                                   fontsize="large")
+                                   fontsize="smaller")
 
         titleGAUSobel = plt.text(0.5,
                                  1.01,
@@ -498,9 +522,9 @@ if __name__ == '__main__':
                                  "*" + str(ksizelist[iternum]),
                                  ha="center",
                                  va="bottom",
-                                 color=[1, 0, 0],
+                                 color=[.3, .3, .3],
                                  transform=axGAUSobel.transAxes,
-                                 fontsize="large")
+                                 fontsize="smaller")
 
         titleAniDiff = plt.text(0.5,
                                 1.01,
@@ -508,18 +532,18 @@ if __name__ == '__main__':
                                 str(niterlist[iternum]),
                                 ha="center",
                                 va="bottom",
-                                color=[1, 0, 0],
+                                color=[.3, .3, .3],
                                 transform=axAniDiff.transAxes,
-                                fontsize="large")
+                                fontsize="smaller")
 
         titleANICanny = plt.text(0.5,
                                  1.01,
                                  "Canny, iteration: " + str(niterlist[iternum]),
                                  ha="center",
                                  va="bottom",
-                                 color=[1, 0, 0],
+                                 color=[.3, .3, .3],
                                  transform=axANICanny.transAxes,
-                                 fontsize="large")
+                                 fontsize="smaller")
 
         titleANIPrewitt = plt.text(0.5,
                                    1.01,
@@ -527,18 +551,18 @@ if __name__ == '__main__':
                                    str(niterlist[iternum]),
                                    ha="center",
                                    va="bottom",
-                                   color=[1, 0, 0],
+                                   color=[.3, .3, .3],
                                    transform=axANIPrewitt.transAxes,
-                                   fontsize="large")
+                                   fontsize="smaller")
 
         titleANISobel = plt.text(0.5,
                                  1.01,
                                  "Sobel, iteration: " + str(niterlist[iternum]),
                                  ha="center",
                                  va="bottom",
-                                 color=[1, 0, 0],
+                                 color=[.3, .3, .3],
                                  transform=axANISobel.transAxes,
-                                 fontsize="large")
+                                 fontsize="smaller")
 
         showGau = axGau.imshow(gaussianblurlst[ksizelist[iternum]], cmap='gray')
 
@@ -575,5 +599,7 @@ if __name__ == '__main__':
                                     interval=2000,
                                     blit=False,
                                     repeat_delay=0)
+
+    ani.save('anisotropic-diffusion.gif', dpi=192, writer='imagemagick')
 
     plt.show()

@@ -34,8 +34,12 @@ ims.append([im])
 
 ani = animation.ArtistAnimation(fig,
                                 ims,
-                                interval=500,
+                                interval=5000,
                                 blit=True,
                                 repeat_delay=0)
 
+# Set up formatting for the movie files
+Writer = animation.writers['ffmpeg']
+writer = Writer(fps=5, metadata=dict(artist='Me'), bitrate=1800)
+ani.save('anisotropic-diffusion-practice.mp4', writer=writer)
 plt.show()
