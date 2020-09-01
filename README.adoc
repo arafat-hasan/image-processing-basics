@@ -2105,7 +2105,7 @@ using the following equation:
 
 
 
-image:https://latex.codecogs.com/png.latex?MSE = \frac{\sum_{M,\ N}{[I_1(m, n) - I_2(m, n)]^2}}{M \times N}[]
+image:https://latex.codecogs.com/png.latex?MSE = \frac{\sum_{M,\ N}{\left[I_1(m, n) - I_2(m, n)\right]^2}}{M \times N}[]
 
 
 
@@ -2620,28 +2620,43 @@ a θ orientation. Here are the four convolution masks to detect
 horizontal, vertical, oblique (+45 degrees), and oblique (-45 degrees)
 lines in an image.
 
-1.  Horizontal mask (image:https://latex.codecogs.com/png.latex?R_1[]) image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
+1.  Horizontal mask (image:https://latex.codecogs.com/png.latex?R_1[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	-1	&	-1	\\
 2	&	2	&	2	\\
 -1	&	-1	&	-1
 \end{bmatrix}[]
-2.  Vertical (image:https://latex.codecogs.com/png.latex?R_3[]) image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
+
+
+2.  Vertical (image:https://latex.codecogs.com/png.latex?R_3[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	2	&	-1 \\
 -1	&	2	&	-1 \\
 -1	&	2	&	-1 
 \end{bmatrix}[]
+
+
 3.  Oblique (+45 degrees)(image:https://latex.codecogs.com/png.latex?R_2[])
+
+
 image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	-1	&	2 \\
 -1	&	2	&	-1 \\
 2	&	-1	&	-1
 \end{bmatrix}[]
+
+
 4.  Oblique (-45 degrees)(image:https://latex.codecogs.com/png.latex?R_4[])
+
+
 image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 2	&	-1	&	-1 \\
 -1	&	2	&	-1 \\
 -1	&	-1	&	2 
 \end{bmatrix}[]
+
 
 In practice, masks are run over the image and the responses are combined
 given by the following equation:
