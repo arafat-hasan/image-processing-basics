@@ -2103,7 +2103,9 @@ the value of MSE, the lower the error.
 To compute the PSNR, the block first calculates the mean-squared error
 using the following equation:
 
-image:https://latex.codecogs.com/png.latex?MSE=\frac{\sum_{M, N}{{\left[I_1(m, n) - I_2(m, n)\right]}^{2}}}{M \times N}[]
+image:https://latex.codecogs.com/png.latex?MSE=\frac{\sum_{M, N}{{\left(I_1(m, n) - I_2(m, n)\right)}^{2}}}{M \times N}[]
+
+image:https://latex.codecogs.com/png.latex?SNR =  \frac{\frac{1}{M \times N}  {{\sum}}_{M,\ N}{I(m, n)^2}}{MSE}[]
 
 In the previous equation, M and N are the number of rows and columns in
 the input images. Then the block computes the PSNR using the following
