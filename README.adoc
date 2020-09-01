@@ -2624,20 +2624,12 @@ lines in an image.
 
 ++++
 <p align="center">
-<img align="center" src="https://latex.codecogs.com/png.latex?\begin{bmatrix}
--1	&	-1	&	-1	\\
-2	&	2	&	2	\\
--1	&	-1	&	-1
-\end{bmatrix}">
+<img align="center" src="https://latex.codecogs.com/png.latex?\begin{bmatrix}-1&-1&-1\\2&2&2\\-1&-1&-1\end{bmatrix}">
 </p>
 ++++
 
 
-image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
--1	&	-1	&	-1	\\
-2	&	2	&	2	\\
--1	&	-1	&	-1
-\end{bmatrix}[]
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}-1&-1&-1\\2&2&2\\-1&-1&-1\end{bmatrix}[]
 
 
 2.  Vertical (image:https://latex.codecogs.com/png.latex?R_3[])
