@@ -133,9 +133,11 @@ What We Will Know
 are sum of two input images pixels.
 
 Image addition equation is:
-latexmath:[\[g(x, y) = f_1(x, y) + f_2(x, y)\]] Here
-latexmath:[$f_1(x, y)$] and latexmath:[$f_2(x, y)$] are two input images
-and latexmath:[$g(x, y)$] is output image.
+
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]
+
+Here image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
 
 [[lets-code-1]]
 Let's Code
@@ -247,7 +249,7 @@ What We Will Know
 Take two input image and multiply them and generate new output image.
 The multiplication of two images is performed in the obvious way in a
 single pass using the formula:
-latexmath:[\[Q(i, j) = P_1(i, j) \times P_2(i, j)\]]
+image:https://latex.codecogs.com/png.latex?Q(i, j) = P_1(i, j) \times P_2(i, j)[]
 
 [[lets-code-2]]
 Let's Code
@@ -294,8 +296,8 @@ if __name__ == '__main__':
         img2 = cv2.resize(img2, img1.shape[1], img1.shape[2])
 -------------------------------------------------------------------------------
 4.  Ceate a blank output image and convert input images form
-latexmath:[$uint8$] to latexmath:[$float$] to encounter overflow problem
-with latexmath:[$uint8$].
+image:https://latex.codecogs.com/png.latex?uint8[] to image:https://latex.codecogs.com/png.latex?float[] to encounter overflow problem
+with image:https://latex.codecogs.com/png.latex?uint8[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -315,7 +317,7 @@ output pixels.
             output[row, col] = max(0, min(tmp, 255))
 -------------------------------------------------------------------------------
 6.  Plot two input images and result image’s using
-latexmath:[$matplotlib$].
+image:https://latex.codecogs.com/png.latex?matplotlib[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -364,7 +366,7 @@ What We Will Know
 Take two input image and divide one by another and generate new output
 image. The division of two images is performed in the obvious way in a
 single pass using the formula:
-latexmath:[\[Q(i, j) = P_1(i, j) \div P_2(i, j)\]]
+image:https://latex.codecogs.com/png.latex?Q(i, j) = P_1(i, j) \div P_2(i, j)[]
 
 [[lets-code-3]]
 Let's Code
@@ -412,8 +414,8 @@ if __name__ == '__main__':
         img2 = cv2.resize(img2, img1.shape[1], img1.shape[2])
 -------------------------------------------------------------------------------
 4.  Ceate a blank output image and convert input images form
-latexmath:[$uint8$] to latexmath:[$float$] to encounter overflow problem
-with latexmath:[$uint8$].
+image:https://latex.codecogs.com/png.latex?uint8[] to image:https://latex.codecogs.com/png.latex?float[] to encounter overflow problem
+with image:https://latex.codecogs.com/png.latex?uint8[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -436,7 +438,7 @@ output pixels.
             output[row, col] = max(0, min(tmp, 255))
 -------------------------------------------------------------------------------
 6.  Plot two input images and result image’s using
-latexmath:[$matplotlib$].
+image:https://latex.codecogs.com/png.latex?matplotlib[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -491,13 +493,13 @@ shadow/highlight.
 
 Brightness calculation formula is:
 
-latexmath:[\[B = \frac{\mathlarger{\mathlarger{\sum}}_{M,\ N}{I(m, n)}}{M \times N}\]]
+image:https://latex.codecogs.com/png.latex?B = \frac{\sum_{M,\ N}{I(m, n)}}{M \times N}[]
 
 In this equation, M and N are the number of rows and columns in the
 input images. To increase/decrease brightness level of the image, simply
 add/subtract a constant positive value to each and every image pixel.
 
-latexmath:[\[Image_{new}(m, n) = Image_{old}(m, n) \pm BrightnessConstant\]]
+image:https://latex.codecogs.com/png.latex?Image_{new}(m, n) = Image_{old}(m, n) \pm BrightnessConstant[]
 
 [[lets-code-4]]
 Let's Code
@@ -537,7 +539,7 @@ constant.
     brightnessConstant = 70
 -------------------------------------------------------------------------------
 4.  Iterate over all pixels and decrease intensity of each pixel and
-bond the pixels in range latexmath:[$[0, 255]$].
+bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -623,7 +625,7 @@ What We Will Know of this experiment is to:
 * Calculate contrast of an image.
 
 Contrast calculation formula:
-latexmath:[\[Contrast= Maximum\ pixel\ intensity - Minimum\ pixel\ intensity\]]
+image:https://latex.codecogs.com/png.latex?Contrast= Maximum\ pixel\ intensity - Minimum\ pixel\ intensity[]
 
 [[lets-code-5]]
 Let's Code
@@ -663,7 +665,7 @@ constant.
     contrastConstant = 1.7
 -------------------------------------------------------------------------------
 4.  Iterate over all pixels and multiply the constant with each pixel
-and bond the pixels in range latexmath:[$[0, 255]$].
+and bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -873,7 +875,10 @@ of three colors. Since its an RGB image, so it means that you have add r
 with g with b and then divide it by 3 to get your desired grayscale
 image.
 
-Its done in this way. latexmath:[\[Grayscale = (R + G + B / 3)\]]
+Its done in this way.
+
+image:https://latex.codecogs.com/png.latex?Grayscale = (R + G + B / 3)[]
+
 
 [[weighted-method-or-luminosity-method]]
 Weighted method or luminosity method
@@ -888,7 +893,8 @@ increase the contribution of the green color, and put blue color
 contribution in between these two.
 
 So the new equation that form is:
-latexmath:[\[New \ grayscale \ image = ( (0.299 * R) + (0.587 * G) + (0.144 * B) ).\]]
+
+image:https://latex.codecogs.com/png.latex?New \ grayscale \ image = ( (0.299 \times R) + (0.587 \times G) + (0.144 \times B) ).[]
 
 According to this equation, Red has contribute 30%, Green has
 contributed 59% which is greater in all three colors and Blue has
@@ -902,11 +908,11 @@ To convert RGB image to Binary image, we have to the RGB image into
 Grayscale image first. Then we set threshold value. Then we use this
 equation :
 
-latexmath:[\[y=
+image:https://latex.codecogs.com/png.latex?y=
    \begin{cases}
      1, & \text{if}\ y \geq threshhold \\
      0, & \text{otherwise}
-   \end{cases}\]]
+   \end{cases}[]
 
 [[lets-code-7]]
 Let's Code
@@ -1050,7 +1056,8 @@ as a digital negative of the original image.
 
 This is particularly useful for enhancing white or gray details embedded
 in dark regions of an image.
-latexmath:[\[I_{inverted}(x, y) = 255 - I(x, y)\]]
+
+image:https://latex.codecogs.com/png.latex?I_{inverted}(x, y) = 255 - I(x, y)[]
 
 [[lets-code-8]]
 Let's Code
@@ -1098,7 +1105,7 @@ determine output pixel.
             output[row, col] = 255 - img[row, col]
 -------------------------------------------------------------------------------
 5.  Plot input image and result output image using
-latexmath:[$matplotlib$].
+image:https://latex.codecogs.com/png.latex?matplotlib[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -1152,18 +1159,18 @@ mask* or the *alpha matte*.
 
 The math behind alpha blending is straight forward. At *every pixel* of
 the image, we need to combine the foreground image color
-latexmath:[$(F)$] and the background image color latexmath:[$(B)$] using
-the alpha mask latexmath:[$(\alpha)$].
+image:https://latex.codecogs.com/png.latex?(F)[] and the background image color image:https://latex.codecogs.com/png.latex?(B)[] using
+the alpha mask image:https://latex.codecogs.com/png.latex?(\alpha)[].
 
-latexmath:[\[I = \alpha F + (1-\alpha)B\]]
+image:https://latex.codecogs.com/png.latex?I = \alpha F + (1-\alpha)B[]
 
 From the equation above, you can make the following observations.
 
-* When latexmath:[$\alpha = 0$], the output pixel color is the
+* When image:https://latex.codecogs.com/png.latex?\alpha = 0[], the output pixel color is the
 background.
-* When latexmath:[$\alpha = 1$], the output pixel color is simply the
+* When image:https://latex.codecogs.com/png.latex?\alpha = 1[], the output pixel color is simply the
 foreground.
-* When latexmath:[$0 < \alpha < 1$] the output pixel color is a mix of
+* When image:https://latex.codecogs.com/png.latex?0 < \alpha < 1[] the output pixel color is a mix of
 the background and the foreground. For realistic blending, the boundary
 of the alpha mask usually has pixels that are between 0 and 1.
 
@@ -1232,7 +1239,7 @@ image.
     rows, cols = background.shape
     output = np.zeros((rows, cols), dtype='float')
 -------------------------------------------------------------------------------
-5.  Convert images form latexmath:[$uint8$] to latexmath:[$float$]. And
+5.  Convert images form image:https://latex.codecogs.com/png.latex?uint8[] to image:https://latex.codecogs.com/png.latex?float[]. And
 normalize the alpha mask to keep intensity between 0 and 1.
 +
 [source,python]
@@ -1309,21 +1316,21 @@ What We Will Know
 
 The log transformations can be defined by this formula
 
-latexmath:[\[s = c \ log(r + 1)\]]
+image:https://latex.codecogs.com/png.latex?s = c \ log(r + 1)[]
 
-Where latexmath:[$s$] and latexmath:[$r$] are the pixel values of the
-output and the input image and latexmath:[$c$] is a constant. The value
-latexmath:[$1$] is added to each of the pixel value of the input image
+Where image:https://latex.codecogs.com/png.latex?s[] and image:https://latex.codecogs.com/png.latex?r[] are the pixel values of the
+output and the input image and image:https://latex.codecogs.com/png.latex?c[] is a constant. The value
+image:https://latex.codecogs.com/png.latex?1[] is added to each of the pixel value of the input image
 because if there is a pixel intensity of 0 in the image, then
-latexmath:[$log(0)$] is equal to infinity. So latexmath:[$1$] is added,
-to make the minimum value at least latexmath:[$1$].
+image:https://latex.codecogs.com/png.latex?log(0)[] is equal to infinity. So image:https://latex.codecogs.com/png.latex?1[] is added,
+to make the minimum value at least image:https://latex.codecogs.com/png.latex?1[].
 
 During log transformation, the dark pixels in an image are expanded as
 compare to the higher pixel values. The higher pixel values are kind of
 compressed in log transformation. This result in following image
 enhancement.
 
-The value of latexmath:[$c$] in the log transform adjust the kind of
+The value of image:https://latex.codecogs.com/png.latex?c[] in the log transform adjust the kind of
 enhancement you are looking for.
 
 [[lets-code-10]]
@@ -1373,7 +1380,7 @@ determine output pixel.
             output[row, col] = c * np.log(img[row, col] + 1)
 -------------------------------------------------------------------------------
 5.  Plot input image and result output image using
-latexmath:[$matplotlib$].
+image:https://latex.codecogs.com/png.latex?matplotlib[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -1501,7 +1508,7 @@ with input image.
                 outputWithoutBack[row, col] = 0
 -------------------------------------------------------------------------------
 5.  Plot input image and resulted with background and without background
-images using latexmath:[$matplotlib$].
+images using image:https://latex.codecogs.com/png.latex?matplotlib[].
 +
 [source,python]
 -------------------------------------------------------------------------------
@@ -1551,10 +1558,10 @@ What We Will Know
 ~~~~~~~~~~~~~~~~~
 
 For an 8-bit image, a pixel value of 0 is represented as
-latexmath:[$00000000$] in binary form and 255 is encoded as
-latexmath:[$11111111$]. Here, the leftmost bit is known as the most
+image:https://latex.codecogs.com/png.latex?00000000[] in binary form and 255 is encoded as
+image:https://latex.codecogs.com/png.latex?11111111[]. Here, the leftmost bit is known as the most
 significant bit (MSB) as it contributes the maximum. e.g. if MSB of
-latexmath:[$11111111$] is changed to 0 (i.e. latexmath:[$01111111$]),
+image:https://latex.codecogs.com/png.latex?11111111[] is changed to 0 (i.e. image:https://latex.codecogs.com/png.latex?01111111[]),
 then the value changes from 255 to 127. Similarly, rightmost bit is
 known as Least significant bit (LSB).
 
@@ -1562,7 +1569,7 @@ In Bit-plane slicing, we divide the image into bit planes. This is done
 by first converting the pixel values in the binary form and then
 dividing it into bit planes.
 
-For simplicity let’s take a latexmath:[$3 \times 3$], 3-bit image as
+For simplicity let’s take a image:https://latex.codecogs.com/png.latex?3 \times 3[], 3-bit image as
 shown below. We know that the pixel values for 3-bit can take values
 between 0 to 7.
 
@@ -2095,13 +2102,18 @@ the value of MSE, the lower the error.
 
 To compute the PSNR, the block first calculates the mean-squared error
 using the following equation:
-latexmath:[\[MSE = \frac{\mathlarger{\mathlarger{\sum}}_{M,\ N}{\left[I_1(m, n) - I_2(m, n)\right]^2}}{M \times N}\]]
+
+
+
+image:https://latex.codecogs.com/png.latex?MSE = \frac{\sum_{M,\ N}{[I_1(m, n) - I_2(m, n)]^2}}{M \times N}[]
+
+
 
 In the previous equation, M and N are the number of rows and columns in
 the input images. Then the block computes the PSNR using the following
 equation:
 
-latexmath:[\[PSNR = 10 \times \log_{10}\left(\frac{R^2}{MSE}\right)\]]
+image:https://latex.codecogs.com/png.latex?PSNR = 10 \times \log_{10}\left(\frac{R^2}{MSE}\right)[]
 
 In the previous equation, R is the maximum fluctuation in the input
 image data type. For example, if the input image has a double-precision
@@ -2112,7 +2124,7 @@ Signal-to-noise ratio (SNR) or peak signal-to-noise ratio (PSNR) are
 directly related quantities, in an inverse logarithmic scale (the higher
 the better), with respect to the data energy (SNR):
 
-latexmath:[\[SNR = 10 \times \log_{10} \left( \frac{\frac{1}{M \times N}  \mathlarger{\mathlarger{\sum}}_{M,\ N}{I(m, n)^2}}{MSE}\right)\]]
+image:https://latex.codecogs.com/png.latex?SNR = 10 \times \log_{10} \left( \frac{\frac{1}{M \times N}  {{\sum}}_{M,\ N}{I(m, n)^2}}{MSE}\right)[]
 
 [[lets-code-16]]
 Let's Code
@@ -2300,21 +2312,21 @@ a uniform step in intensity is not the same over the full range of human
 perception. In fact, they found that the just-noticeable percent is
 nearly constant over a wide range. This is known now as Weber’s law.
 Writing I for the incident intensity (or luminance) and
-latexmath:[$\Delta I$] for the just-noticeable change, we have
-latexmath:[$\frac{\Delta I}{I}  \approx  constant$], with the constant
-value in the range latexmath:[$[0.01,0.03]$], and this value holds
-constant for at least three decades in latexmath:[$logI$]. We note that
+image:https://latex.codecogs.com/png.latex?\Delta I[] for the just-noticeable change, we have
+image:https://latex.codecogs.com/png.latex?\frac{\Delta I}{I}  \approx  constant[], with the constant
+value in the range image:https://latex.codecogs.com/png.latex?[0.01,0.03][], and this value holds
+constant for at least three decades in image:https://latex.codecogs.com/png.latex?logI[]. We note that
 Weber’s law says we are more sensitive to light intensity changes in low
 light levels than in strong ones.
 
 The main What We Will Know of this experiment is to calculate Weber’s ratio:
-latexmath:[$\frac{\Delta I_c}{I}$] and to detect on which limit of ratio
+image:https://latex.codecogs.com/png.latex?\frac{\Delta I_c}{I}[] and to detect on which limit of ratio
 we can separate the object from background.
 
 * Calculate maximum Weber’s ratio of an given image.
 * Mark the pixels which have bigger brightness change than given Weber’s
 constant.
-* latexmath:[$\Delta I_c$] is the change in the object brightness
+* image:https://latex.codecogs.com/png.latex?\Delta I_c[] is the change in the object brightness
 required to just distinguish the object from the background
 
 [[lets-code-17]]
@@ -2608,33 +2620,33 @@ a θ orientation. Here are the four convolution masks to detect
 horizontal, vertical, oblique (+45 degrees), and oblique (-45 degrees)
 lines in an image.
 
-1.  Horizontal mask(latexmath:[$R_1$]) latexmath:[\[\begin{bmatrix}
+1.  Horizontal mask (image:https://latex.codecogs.com/png.latex?R_1[]) image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	-1	&	-1	\\
 2	&	2	&	2	\\
 -1	&	-1	&	-1
-\end{bmatrix}\]]
-2.  Vertical (latexmath:[$R_3$]) latexmath:[\[\begin{bmatrix}
+\end{bmatrix}[]
+2.  Vertical (image:https://latex.codecogs.com/png.latex?R_3[]) image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	2	&	-1 \\
 -1	&	2	&	-1 \\
 -1	&	2	&	-1 
-\end{bmatrix}\]]
-3.  Oblique (+45 degrees)(latexmath:[$R_2$])
-latexmath:[\[\begin{bmatrix}
+\end{bmatrix}[]
+3.  Oblique (+45 degrees)(image:https://latex.codecogs.com/png.latex?R_2[])
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 -1	&	-1	&	2 \\
 -1	&	2	&	-1 \\
 2	&	-1	&	-1
-\end{bmatrix}\]]
-4.  Oblique (-45 degrees)(latexmath:[$R_4$])
-latexmath:[\[\begin{bmatrix}
+\end{bmatrix}[]
+4.  Oblique (-45 degrees)(image:https://latex.codecogs.com/png.latex?R_4[])
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}
 2	&	-1	&	-1 \\
 -1	&	2	&	-1 \\
 -1	&	-1	&	2 
-\end{bmatrix}\]]
+\end{bmatrix}[]
 
 In practice, masks are run over the image and the responses are combined
 given by the following equation:
-latexmath:[\[R(x, y) = max(|R_1 (x, y)|, |R_2 (x, y)|, |R_3 (x, y)|, |R_4 (x, y)|)\]]
-If latexmath:[$R(x, y) > T$], then discontinuity.
+image:https://latex.codecogs.com/png.latex?R(x, y) = max(|R_1 (x, y)|, |R_2 (x, y)|, |R_3 (x, y)|, |R_4 (x, y)|)[]
+If image:https://latex.codecogs.com/png.latex?R(x, y) > T[], then discontinuity.
 
 [[lets-code-19]]
 Let's Code
@@ -2797,9 +2809,9 @@ What We Will Know
 are sum of two input images pixels.
 
 Image morphological-transformations equation is
-latexmath:[$g(x, y) = f_1(x, y) + f_2(x, y)$]. Here
-latexmath:[$f_1(x, y)$] and latexmath:[$f_2(x, y)$] are two input images
-and latexmath:[$g(x, y)$] is output image.
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]. Here
+image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
 
 [[lets-code-20]]
 Let's Code
@@ -2893,9 +2905,9 @@ What We Will Know
 are sum of two input images pixels.
 
 Image ringing-artifacts equation is
-latexmath:[$g(x, y) = f_1(x, y) + f_2(x, y)$]. Here
-latexmath:[$f_1(x, y)$] and latexmath:[$f_2(x, y)$] are two input images
-and latexmath:[$g(x, y)$] is output image.
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]. Here
+image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
 
 [[lets-code-21]]
 Let's Code
