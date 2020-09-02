@@ -4,18 +4,22 @@
 :Revision:  v1.0
 :gitrepo: https://github.com/arafat-hasan/oh-my-image-processing-course
 :doctype: book
+:toc: macro
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:tip-caption: :bulb:
 
 
 Basics of Image Processing
 ==========================
 
 
-|======
 
-TIP: [yellow-background]#You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.#
 
-|======
+TIP: You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.
 
+
+toc::[]
 
 
 *** link:/src/basic-operations/[Basic Operations on an Image]
