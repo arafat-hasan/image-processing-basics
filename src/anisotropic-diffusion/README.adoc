@@ -16,4 +16,6 @@ Compare edge detection using gaussian and anisotropic diffusion. The output is a
 
 
 
-image:/imageOut/anisotropic-diffusion.gif[]
+image:/imgOut/anisotropic-diffusion.gif[Anisotropic Diffusion Animation]
+
+
