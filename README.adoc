@@ -12,7 +12,7 @@ Basics of Image Processing
 
 |======
 
-* :information_source: [yellow-background]#You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.# *
+TIP: [yellow-background]#You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.#
 
 |======
 
