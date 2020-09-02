@@ -13,52 +13,51 @@
 Image Processing Course
 =======================
 
+include::src/basic-operations/README.adoc[Basic Operations on an Image]
 
-include::src/addition/README.adoc[]
+include::src/addition/README.adoc[Addition of Two Images]
 
-include::src/bit-plane-slicing/README.adoc[]
+include::src/use-of-subtraction/README.adoc[Use of subtraction]
 
-include::src/gaussian-filter/README.adoc[]
+include::src/multiplication/README.adoc[Multiplication of Two Images]
 
-include::src/minimum-maximum-and-median-filters/README.adoc[]
+include::src/division/README.adoc[Division of Two Images]
 
-include::src/reading-and-writing-of-color-image/README.adoc[]
+include::src/brightness/README.adoc[Brightness Increasing and Calculation]
 
-include::src/alpha-blending/README.adoc[]
+include::src/contrast/README.adoc[Image Contrast Changing and Calculation]
 
-include::src/brightness/README.adoc[]
+include::src/RGB-to-gray-and-binary/README.adoc[Grayscale and Binary Conversion]
 
-include::src/intensity-level-slicing/README.adoc[]
+include::src/reading-and-writing-of-color-image/README.adoc[Reading and Writing of Color Image]
 
-include::src/morphological-transformations/README.adoc[]
+include::src/gaussian-filter/README.adoc[Gaussian Filter]
 
-include::src/RGB-to-gray-and-binary/README.adoc[]
+include::src/average-filter/README.adoc[Average Filtering]
 
-include::src/anisotropic-diffusion/README.adoc[]
+include::src/minimum-maximum-and-median-filters/README.adoc[Minimum, Maximum and Median Filter]
 
-include::src/contrast/README.adoc[]
+include::src/alpha-blending/README.adoc[Alpha Blending]
 
-include::src/MSE-PSNR-SNR/README.adoc[]
+include::src/bit-plane-slicing/README.adoc[Bit Plane Slicing]
 
-include::src/ringing-artifacts/README.adoc[]
+include::src/intensity-level-slicing/README.adoc[Intensity Level Slicing]
 
-include::src/average-filter/README.adoc[]
+include::src/morphological-transformations/README.adoc[Morphological Transformations]
 
-include::src/detect-edge-using-canny-sobel-prewitt/README.adoc[]
+include::src/log-transformation/README.adoc[Log Transformation]
 
-include::src/line-detection/README.adoc[]
+include::src/negation/README.adoc[Negative Transformation]
 
-include::src/multiplication/README.adoc[]
+include::src/detect-edge-using-canny-sobel-prewitt/README.adoc[Canny, Sobel and Prewitt]
 
-include::src/use-of-subtraction/README.adoc[]
+include::src/line-detection/README.adoc[Line Detection]
 
-include::src/basic-operations/README.adoc[]
+include::src/ringing-artifacts/README.adoc[Ringing Artifacts]
 
-include::src/division/README.adoc[]
+include::src/MSE-PSNR-SNR/README.adoc[Calculate MSE, SNR and PSNR]
 
-include::src/log-transformation/README.adoc[]
+include::src/anisotropic-diffusion/README.adoc[Anisotropic Diffusion]
 
-include::src/negation/README.adoc[]
-
-include::src/weber-ratio/README.adoc[]
+include::src/weber-ratio/README.adoc[Use of Weber’s Ratio]
 
