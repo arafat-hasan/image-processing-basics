@@ -17,4 +17,4 @@ Compare edge detection using gaussian and anisotropic diffusion. The output is a
 Python 2 code, I am working on python 3.
 
 
-image:imageOut/anisotropic-diffusion.gif[]
+image:/imageOut/anisotropic-diffusion.gif[]
