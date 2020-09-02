@@ -13,6 +13,15 @@
 Image Processing Course
 =======================
 
+ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+
+See the <<README#,README>>.
+
+We could also write the link as link:/src/basic-operations/README{outfilesuffix}[README].
+
+
+
+
 include::src/basic-operations/README.adoc[Basic Operations on an Image]
 
 include::src/addition/README.adoc[Addition of Two Images]
