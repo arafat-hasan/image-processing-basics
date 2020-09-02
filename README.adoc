@@ -9,6 +9,14 @@
 Basics of Image Processing
 ==========================
 
+
+.All Together
+[NOTE]
+~~~~~~
+TIP: [yellow-background]#You’ll probably want to see link:/docs/basics-of-image-processing.pdf[this] pdf.#
+
+
+
 * link:/src/basic-operations/[Basic Operations on an Image]
 
 * link:/src/addition/[Addition of Two Images]
@@ -58,5 +66,5 @@ Basics of Image Processing
 * link:/src/weber-ratio/[Use of Weber’s Ratio]
 
 
-Check link:/docs/basics-of-image-processing.pdf[this] out.
+
 
