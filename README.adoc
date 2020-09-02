@@ -3,7 +3,7 @@
 :Date:      August 29, 2020
 :Revision:  v1.0
 :gitrepo: https://github.com/arafat-hasan/oh-my-image-processing-course
-
+:doctype: book
 
 
 Basics of Image Processing
@@ -56,4 +56,7 @@ Basics of Image Processing
 * link:/src/anisotropic-diffusion/[Anisotropic Diffusion]
 
 * link:/src/weber-ratio/[Use of Weber’s Ratio]
+
+
+Check link:/docs/basics-of-image-processing.pdf[this] out.
 
