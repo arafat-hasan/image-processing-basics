@@ -10,57 +10,61 @@ Basics of Image Processing
 ==========================
 
 
-_* [:information_source:] [yellow-background]#You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.# *_
+|======
+
+* :information_source: [yellow-background]#You’ll probably want to check link:/docs/basics-of-image-processing.pdf[this] pdf.# *
+
+|======
 
 
 
-* link:/src/basic-operations/[Basic Operations on an Image]
+*** link:/src/basic-operations/[Basic Operations on an Image]
 
-* link:/src/addition/[Addition of Two Images]
+*** link:/src/addition/[Addition of Two Images]
 
-* link:/src/use-of-subtraction/[Use of subtraction]
+*** link:/src/use-of-subtraction/[Use of subtraction]
 
-* link:/src/multiplication/[Multiplication of Two Images]
+*** link:/src/multiplication/[Multiplication of Two Images]
 
-* link:/src/division/[Division of Two Images]
+*** link:/src/division/[Division of Two Images]
 
-* link:/src/brightness/[Brightness Increasing and Calculation]
+*** link:/src/brightness/[Brightness Increasing and Calculation]
 
-* link:/src/contrast/[Image Contrast Changing and Calculation]
+*** link:/src/contrast/[Image Contrast Changing and Calculation]
 
-* link:/src/RGB-to-gray-and-binary/[Grayscale and Binary Conversion]
+*** link:/src/RGB-to-gray-and-binary/[Grayscale and Binary Conversion]
 
-* link:/src/reading-and-writing-of-color-image/[Reading and Writing of Color Image]
+*** link:/src/reading-and-writing-of-color-image/[Reading and Writing of Color Image]
 
-* link:/src/gaussian-filter/[Gaussian Filter]
+*** link:/src/gaussian-filter/[Gaussian Filter]
 
-* link:/src/average-filter/[Average Filtering]
+*** link:/src/average-filter/[Average Filtering]
 
-* link:/src/minimum-maximum-and-median-filters/[Minimum, Maximum and Median Filter]
+*** link:/src/minimum-maximum-and-median-filters/[Minimum, Maximum and Median Filter]
 
-* link:/src/alpha-blending/[Alpha Blending]
+*** link:/src/alpha-blending/[Alpha Blending]
 
-* link:/src/bit-plane-slicing/[Bit Plane Slicing]
+*** link:/src/bit-plane-slicing/[Bit Plane Slicing]
 
-* link:/src/intensity-level-slicing/[Intensity Level Slicing]
+*** link:/src/intensity-level-slicing/[Intensity Level Slicing]
 
-* link:/src/morphological-transformations/[Morphological Transformations]
+*** link:/src/morphological-transformations/[Morphological Transformations]
 
-* link:/src/log-transformation/[Log Transformation]
+*** link:/src/log-transformation/[Log Transformation]
 
-* link:/src/negation/[Negative Transformation]
+*** link:/src/negation/[Negative Transformation]
 
-* link:/src/detect-edge-using-canny-sobel-prewitt/[Canny, Sobel and Prewitt]
+*** link:/src/detect-edge-using-canny-sobel-prewitt/[Canny, Sobel and Prewitt]
 
-* link:/src/line-detection/[Line Detection]
+*** link:/src/line-detection/[Line Detection]
 
-* link:/src/ringing-artifacts/[Ringing Artifacts]
+*** link:/src/ringing-artifacts/[Ringing Artifacts]
 
-* link:/src/MSE-PSNR-SNR/[Calculate MSE, SNR and PSNR]
+*** link:/src/MSE-PSNR-SNR/[Calculate MSE, SNR and PSNR]
 
-* link:/src/anisotropic-diffusion/[Anisotropic Diffusion]
+*** link:/src/anisotropic-diffusion/[Anisotropic Diffusion]
 
-* link:/src/weber-ratio/[Use of Weber’s Ratio]
+*** link:/src/weber-ratio/[Use of Weber’s Ratio]
 
 
 
