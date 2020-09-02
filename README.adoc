@@ -11,9 +11,9 @@ Basics of Image Processing
 
 
 .All Together
-[NOTE]
+[:information_source:]
 ~~~~~~
-TIP: [yellow-background]#You’ll probably want to see link:/docs/basics-of-image-processing.pdf[this] pdf.#
+[yellow-background]#You’ll probably want to see link:/docs/basics-of-image-processing.pdf[this] pdf.#
 
 
 
