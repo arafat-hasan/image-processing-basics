@@ -13,7 +13,7 @@
 Image Processing Course
 =======================
 
-* link:/src/basic-operations/README.adoc[Basic Operations on an Image]
+* link:/src/basic-operations/[Basic Operations on an Image]
 
 * link:/src/addition/README.adoc[Addition of Two Images]
 
