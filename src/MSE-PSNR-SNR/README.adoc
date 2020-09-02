@@ -1,0 +1,218 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+[[calculate-mse-snr-and-psnr]]
+Calculate MSE, SNR and PSNR
+---------------------------
+
+[[what-we-will-know-16]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+The main What We Will Know of this experiment is to calculate MSE, SNR, PSNR of
+an image. The mean-square error (MSE) and the peak signal-to-noise ratio
+(PSNR) are used to compare image compression quality. The MSE represents
+the cumulative squared error between the compressed and the original
+image, whereas PSNR represents a measure of the peak error. The lower
+the value of MSE, the lower the error.
+
+To compute the PSNR, the block first calculates the mean-squared error
+using the following equation:
+
+image:https://latex.codecogs.com/png.latex?MSE=\frac{\sum_{M, N}{{\left(I_1(m, n) - I_2(m, n)\right)}^{2}}}{M \times N}[]
+
+In the previous equation, M and N are the number of rows and columns in
+the input images. Then the block computes the PSNR using the following
+equation:
+
+image:https://latex.codecogs.com/png.latex?PSNR = 10 \times \log_{10}\left(\frac{R^2}{MSE}\right)[]
+
+In the previous equation, R is the maximum fluctuation in the input
+image data type. For example, if the input image has a double-precision
+floating-point data type, then R is 1. If it has an 8-bit unsigned
+integer data type, R is 255, etc.
+
+Signal-to-noise ratio (SNR) or peak signal-to-noise ratio (PSNR) are
+directly related quantities, in an inverse logarithmic scale (the higher
+the better), with respect to the data energy (SNR):
+
+image:https://latex.codecogs.com/png.latex?SNR = 10 \times \log_{10} \left( \frac{\frac{1}{M \times N}  {{\sum}}_{M,\ N}{I(m, n)^2}}{MSE}\right)[]
+
+[[lets-code-16]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import random
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage.util import random_noise
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Define custom written function to calculate MSE, PSNR and SNR
+according to the equations.
++
+[source,python]
+-------------------------------------------------------------------------------
+def fun(img):
+    height, width = img.shape
+    MSE_gauss = 0
+    MSE_median = 0
+    r = 0
+    R = 0
+
+    for i in range(0, height):
+        for j in range(0, width):
+            p = img[i, j]
+            R = max(R, p)
+            # r = r + p
+            r = r + p * p
+            p1 = randomNoisy[i, j]
+            p2 = saltPepperNoisy[i, j]
+            p3 = gausianBlur[i, j]
+            p4 = medianBlur[i, j]
+
+            MSE_gauss = MSE_gauss + (p1 - p3) * (p1 - p3)
+            MSE_median = MSE_median + (p2 - p4) * (p2 - p4)
+
+    MSE_gauss = MSE_gauss / (height * width)
+    MSE_median = MSE_median / (height * width)
+
+    PSNR_gauss = 10 * math.log10((R * R) / MSE_gauss)
+    PSNR_median = 10 * math.log10((R * R) / MSE_median)
+
+    r = r // (height * width)
+
+    # SNR_gauss = 10 * math.log10( (r*r) / MSE_gauss )
+    # SNR_median = 10 * math.log10( (r*r) / MSE_median )
+    SNR_gauss = 10 * math.log10(r / MSE_gauss)
+    SNR_median = 10 * math.log10(r / MSE_median)
+    print('Gaussian MSE: ', MSE_gauss, '\tMedian MSE: ', MSE_median)
+    print('Gaussian SNR: ', SNR_gauss, '\tMedian SNR: ', SNR_median)
+    print('Gaussian PSNR: ', PSNR_gauss, '\tMedian PSNR: ', PSNR_median)
+-------------------------------------------------------------------------------
+3.  Define a function for applying salt and pepper noise.
++
+[source,python]
+-------------------------------------------------------------------------------
+def saltPepperNoise(image, prob):
+    # Thanks to ppk28
+    # https://stackoverflow.com/a/27342545/7829174
+    '''
+    Add salt and pepper noise to image
+    prob: Probability of the noise
+    '''
+    output = np.zeros(image.shape, np.uint8)  #uint8 - unsigned 8 bit integer
+
+    thres = 1 - prob
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            rdn = random.random(
+            )  # generates a random number between (0.0 to 1.0)
+            if rdn < prob:
+                output[i][j] = 0
+            elif rdn > thres:
+                output[i][j] = 255
+            else:
+                output[i][j] = image[i][j]
+    return output
+-------------------------------------------------------------------------------
+4.  Start driver program and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/lennaGray.png'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+5.  Apply various noise and kernels and make different images.
++
+[source,python]
+-------------------------------------------------------------------------------
+    randomNoisy = random_noise(img, mode='gaussian', seed=None, clip=True)
+    saltPepperNoisy = saltPepperNoise(img, 0.05)
+    gausianBlur = cv2.GaussianBlur(randomNoisy, (5, 5), 0)
+    medianBlur = cv2.medianBlur(saltPepperNoisy, 5)
+-------------------------------------------------------------------------------
+6.  Convert images to `float`.
++
+[source,python]
+-------------------------------------------------------------------------------
+    img = img.astype(float)
+    randomNoisy = randomNoisy.astype(float)
+    saltPepperNoisy = saltPepperNoisy.astype(float)
+    gausianBlur = gausianBlur.astype(float)
+    medianBlur = medianBlur.astype(float)
+-------------------------------------------------------------------------------
+7.  Call `fun()` function to calculate MSE, PSNR and SNR and print.
++
+[source,python]
+-------------------------------------------------------------------------------
+    fun(img)
+-------------------------------------------------------------------------------
+8.  Plot various filter applied created images using `matplotlib`.
++
+[source,python]
+-------------------------------------------------------------------------------
+    imgArr = [randomNoisy, saltPepperNoisy, gausianBlur, medianBlur]
+    title = [
+        'Gaussian Noisy', 'Salt Pepper Noisy', 'Gaussian Blur', 'Median Blur'
+    ]
+
+    for i in range(len(imgArr)):
+        plt.subplot(2, 2, i + 1)
+        plt.imshow(imgArr[i], cmap='gray')
+        plt.title(title[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-16]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-16]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/MSE-PSNR-SNR.png[Applying MSE, PSNR and SNR on
+various noisy and restored images.]
+
+[[text-output-16]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+Gaussian MSE:  0.00831215811499492 	Median MSE:  1860.567268371582
+Gaussian SNR:  63.24637556994362 	Median SNR:  9.747059763742197
+Gaussian PSNR:  68.58618372893046 	Median PSNR:  15.08686792272904
+[INFO] All operations finished successfully...
+....
+

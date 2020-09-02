@@ -1,0 +1,186 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+[[minimum-maximum-and-median-filter]]
+Minimum, Maximum and Median Filter
+----------------------------------
+
+[[what-we-will-know-15]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Minimum, Maximum and Median filter are used to reduce noise on an image.
+Median filtering is excellent at reducing salt and pepper noise. Minimum
+filter can be used to reduce white spot form image and maximum filter
+can be used to reduce black spot from an image.
+
+* Considering the minimum value of a region of interest is called
+minimum filtering.
+* Considering the maximum value of a region of interest is called
+maximum filtering.
+* Considering the Median value of a region of interest is called median
+filtering.
+
+[[lets-code-15]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage.exposure import rescale_intensity
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read images.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path1 = '../../img/lennaSaltPepperNoisy.png'
+    path2 = '../../img/bone-with-white-spot.jpg'
+    path3 = '../../img/bone-with-black-spot.jpg'
+
+    if os.path.isfile(path1):
+        img1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print ("[INFO] The file '" + path1 + "' does not exist.")
+        sys.exit(0)
+
+    if os.path.isfile(path2):
+        img2 = cv2.imread(path2, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print ("[INFO] The file '" + path2 + "' does not exist.")
+        sys.exit(0)
+
+    if os.path.isfile(path3):
+        img3 = cv2.imread(path3, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print ("[INFO] The file '" + path3 + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Resize the three images of same size to make the iteration over the
+images easy.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # Making each image of same size
+    img1 = cv2.resize(img1, (512, 512))
+    img2 = cv2.resize(img2, (512, 512))
+    img3 = cv2.resize(img3, (512, 512))
+-------------------------------------------------------------------------------
+4.  Create a clone of each image, the clones will be used to plot the
+images later. As the main images will be padded, and the shape will be
+changed.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # Keeping a clone of each image without padding, to use later
+    img1Cpy = img1.copy()
+    img2Cpy = img2.copy()
+    img3Cpy = img3.copy()
+-------------------------------------------------------------------------------
+5.  Get image size and declare the filter size.
++
+[source,python]
+-------------------------------------------------------------------------------
+    (iH, iW) = img1.shape[:2]
+    kW = 3 # Filter size
+    pad = (kW - 1) // 2
+-------------------------------------------------------------------------------
+6.  Create padding around the images using `cv2.copyMakeBorder`.
++
+[source,python]
+-------------------------------------------------------------------------------
+    img1 = cv2.copyMakeBorder(img1, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+    img2 = cv2.copyMakeBorder(img2, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+    img3 = cv2.copyMakeBorder(img3, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+-------------------------------------------------------------------------------
+7.  Create blank images to carry output.
++
+[source,python]
+-------------------------------------------------------------------------------
+    outputMedian = np.zeros((iH, iW), dtype="float32")
+    outputMin = np.zeros((iH, iW), dtype="float32")
+    outputMax = np.zeros((iH, iW), dtype="float32")
+-------------------------------------------------------------------------------
+8.  Iterate over images, as all the images are of same size, we are
+iterating over same range and working with all the images.
++
+[source,python]
+-------------------------------------------------------------------------------
+    print("[INFO] Applying various filters...")
+    print("[INFO] This may take a while...")
+    for y in np.arange(pad, iH + pad):
+            for x in np.arange(pad, iW + pad):
+                    roiMedian = img1[y - pad:y + pad + 1, x - pad:x + pad + 1]
+                    roiMin = img2[y - pad:y + pad + 1, x - pad:x + pad + 1]
+                    roiMax = img3[y - pad:y + pad + 1, x - pad:x + pad + 1]
+
+                    outputMedian[y - pad, x - pad] = np.median(roiMedian)
+                    outputMin[y - pad, x - pad] = np.amin(roiMin)
+                    outputMax[y - pad, x - pad] = np.amax(roiMax)
+    print("[INFO] Filter applying completed...")
+-------------------------------------------------------------------------------
+9.  Plot all the images, input image plotted on upper side and output
+image plotted on bottom side.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Input Image', 'Input Image', 'Input Image', 'Median Filter', 'Minimum Filter', 'Maximum Filter']
+    imgarr = [img1Cpy, img2Cpy, img3Cpy, outputMedian, outputMin, outputMax]
+   
+    for i in range(6):
+        plt.subplot(2, 3,i+1)
+        plt.imshow(imgarr[i], cmap = 'gray', vmin = 0, vmax = 255)
+        plt.title(titles[i])
+        plt.xticks ([])
+        plt.yticks ([])
+
+    plt.show ()
+
+    print("[INFO] All operations completed successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-15]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-15]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/minimum-maximum-and-median-filters.png[Median,
+minimum and maximum filtering (Input image at upside, output at
+downside).]
+
+[[text-output-15]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] Image has been read successfully...
+[INFO] Image has been read successfully...
+[INFO] Applying various filters...
+[INFO] This may take a while...
+[INFO] Filter applying completed...
+[INFO] All operations completed successfully...
+....
+

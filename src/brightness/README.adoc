@@ -1,0 +1,142 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+[[brightness-increasing-and-calculation]]
+Brightness Increasing and Calculation
+-------------------------------------
+
+[[what-we-will-know-4]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Brightness is one of the most significant pixel characteristics. It is
+involved in many image-editing algorithms such as contrast or
+shadow/highlight.
+
+* Brightness calculation
+* Increase brightness of an image
+
+Brightness calculation formula is:
+
+image:https://latex.codecogs.com/png.latex?B = \frac{\sum_{M,\ N}{I(m, n)}}{M \times N}[]
+
+In this equation, M and N are the number of rows and columns in the
+input images. To increase/decrease brightness level of the image, simply
+add/subtract a constant positive value to each and every image pixel.
+
+image:https://latex.codecogs.com/png.latex?Image_{new}(m, n) = Image_{old}(m, n) \pm BrightnessConstant[]
+
+[[lets-code-4]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/lennaGray.png'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create a blank image and set a brightness
+constant.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    output = np.zeros((rows, cols), dtype='float')
+    img = img.astype(float)  # To get rid of from overflow
+    brightnessConstant = 70
+-------------------------------------------------------------------------------
+4.  Iterate over all pixels and decrease intensity of each pixel and
+bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
++
+[source,python]
+-------------------------------------------------------------------------------
+    for row in range(rows):
+        for col in range(cols):
+            tmp = img[row, col] - brightnessConstant
+            output[row, col] = max(0, min(tmp, 255))
+-------------------------------------------------------------------------------
+5.  A more pythonic way to do the previous step is written here as
+comment. No need to iterate over pixels, python and numpy do the stuffs
+for us.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # This is more pythonic way for changing  brightness
+    # output = img - brightnessConstant  # No need to iterate over every pixel
+    # lowerbound, upperbound = 0, 255
+    # np.clip(output, lowerbound, upperbound, out=output)  # Numpy do the bounding
+-------------------------------------------------------------------------------
+6.  Print original calculated brightness and changed brightness.
++
+[source,python]
+-------------------------------------------------------------------------------
+    print('Original Brightness: ', np.mean(img))
+    print('Changed Brightness: ', np.mean(output))
+-------------------------------------------------------------------------------
+7.  Plot main input image and brightness changed image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Original Brightness', 'Changed Brightness']
+    imgarr = [img, output]
+    for i in range(2):
+        plt.subplot(1, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin = 0, vmax = 255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-4]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-4]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/brightness.png[Change in brightness on Lenna’s
+image.]
+
+[[text-output-4]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+Original Brightness:  123.54518127441406
+Changed Brightness:  57.06407165527344
+[INFO] All operations finished successfully...
+....
+

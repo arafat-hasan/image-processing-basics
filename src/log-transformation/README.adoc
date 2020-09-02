@@ -1,0 +1,126 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[log-transformation]]
+Log Transformation
+------------------
+
+[[what-we-will-know-10]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+The log transformations can be defined by this formula
+
+image:https://latex.codecogs.com/png.latex?s = c \ log(r + 1)[]
+
+Where image:https://latex.codecogs.com/png.latex?s[] and image:https://latex.codecogs.com/png.latex?r[] are the pixel values of the
+output and the input image and image:https://latex.codecogs.com/png.latex?c[] is a constant. The value
+image:https://latex.codecogs.com/png.latex?1[] is added to each of the pixel value of the input image
+because if there is a pixel intensity of 0 in the image, then
+image:https://latex.codecogs.com/png.latex?log(0)[] is equal to infinity. So image:https://latex.codecogs.com/png.latex?1[] is added,
+to make the minimum value at least image:https://latex.codecogs.com/png.latex?1[].
+
+During log transformation, the dark pixels in an image are expanded as
+compare to the higher pixel values. The higher pixel values are kind of
+compressed in log transformation. This result in following image
+enhancement.
+
+The value of image:https://latex.codecogs.com/png.latex?c[] in the log transform adjust the kind of
+enhancement you are looking for.
+
+[[lets-code-10]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/misc/7.2.01.tiff'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create a blank image identical in size with
+input image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    output = np.zeros((rows, cols), dtype='uint8')
+-------------------------------------------------------------------------------
+4.  Iterate over every pixel and apply the negation equation to
+determine output pixel.
++
+[source,python]
+-------------------------------------------------------------------------------
+    c = 25
+    for row in range(rows):
+        for col in range(cols):
+            output[row, col] = c * np.log(img[row, col] + 1)
+-------------------------------------------------------------------------------
+5.  Plot input image and result output image using
+image:https://latex.codecogs.com/png.latex?matplotlib[].
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Input Image', 'Log Transformed Image']
+    imgarr = [img, output]
+    for i in range(2):
+        plt.subplot(1, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-10]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-10]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/log-transformation.png[Log transformation over
+an aircraft image.]
+
+[[text-output-10]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations finished successfully...
+....
+
+

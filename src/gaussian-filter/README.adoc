@@ -1,0 +1,136 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+[[gaussian-filter]]
+Gaussian Filter
+---------------
+
+[[what-we-will-know-14]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+A Gaussian filter is a linear filter. It’s usually used to blur the
+image or to reduce noise. If you use two of them and subtract, you can
+use them for _unsharp masking_ (edge detection). The Gaussian filter
+alone will blur edges and reduce contrast.
+
+Gaussian filter:
+
+* Gaussian filter is a filter whose impulse response is a Gaussian
+function.
+* Gaussian filters have the properties of having no overshoot to a step
+function input while minimizing the rise and fall time.
+
+[[lets-code-14]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+from skimage.exposure import rescale_intensity
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Define custom written convolution function which takes an image an
+kernel and apply the kernel over the image.
++
+[source,python]
+-------------------------------------------------------------------------------
+def convolve(image, kernel):
+    (iH, iW) = image.shape[:2]
+    (kH, kW) = kernel.shape[:2]
+
+    pad = (kW - 1) // 2
+    image = cv2.copyMakeBorder(image, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
+    output = np.zeros((iH, iW), dtype="float32")
+
+    for y in np.arange(pad, iH + pad):
+        for x in np.arange(pad, iW + pad):
+            roi = image[y - pad:y + pad + 1, x - pad:x + pad + 1]
+            k = (roi * kernel).sum()
+            output[y - pad, x - pad] = k
+
+    output = rescale_intensity(output, in_range=(0, 255))
+    output = (output * 255).astype("uint8")
+
+    return output
+-------------------------------------------------------------------------------
+3.  Start the driver program and read input image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/lennaGaussianNoisy.png'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+4.  Create a Gaussian kernel and send it to `convolve()` function with
+input image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    gaussianKernel = np.array(
+        ([1, 4, 6, 4, 1], [4, 16, 24, 16, 4], [6, 24, 36, 24, 6],
+         [4, 16, 24, 16, 4], [1, 4, 6, 4, 1]), np.float32) / 256
+
+    print("[INFO] Applying Gaussian kernel...")
+    convoleOutput = convolve(img, gaussianKernel)
+-------------------------------------------------------------------------------
+5.  Plot input image and result image using `matplotlib`.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Input Image', 'After Applying Gaussian Filter']
+    imgarr = [img, convoleOutput]
+    for i in range(2):
+        plt.subplot(1, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-14]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-14]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/gaussian-filter.png[Apply of Gaussian
+filtering on Lenna’s noisy image.]
+
+[[text-output-14]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] Applying Gaussian kernel...
+[INFO] All operations finished successfully...
+....
+

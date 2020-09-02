@@ -1,0 +1,108 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+[[morphological-transformations]]
+Morphological Transformations
+-----------------------------
+
+[[what-we-will-know-20]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+* Take two same sized image as input.
+* Produce a third image with same size of the input image which pixels
+are sum of two input images pixels.
+
+Image morphological-transformations equation is
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]. Here
+image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
+
+[[lets-code-20]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main function and read images
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/finger-print.jpg'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print ("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Check whether input images are in identical size.
++
+[source,python]
+-------------------------------------------------------------------------------
+    ret, thresh = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+    kernel = np.ones((3,3),np.uint8)
+    erosion = cv2.erode(thresh,kernel,iterations = 1)
+    dilation = cv2.dilate(erosion,kernel,iterations = 1)
+    opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)
+    closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel)
+-------------------------------------------------------------------------------
+4.  Plot two input images and an output image as
+morphological-transformations result.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Main Image', 'Erosion on Main Image', 'Dilation on Erosion', 'Opening on Main Image', 'Closing on Opening']
+    imgArr = [thresh, erosion, dilation, opening, closing]
+
+    for i in range(5):
+        plt.subplot(1, 5, i+1)
+        plt.imshow(imgArr[i], cmap='gray', vmin = 0, vmax = 255)
+        plt.title(titles[i])
+        plt.xticks([]),plt.yticks([])
+    
+    plt.show()
+
+    print("[INFO] All operations completed successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-20]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-20]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/morphological-transformations.png[Various
+morphological transformations on a finger print image.]
+
+[[text-output-20]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations completed successfully...
+....
+

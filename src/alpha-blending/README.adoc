@@ -1,0 +1,176 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[alpha-blending]]
+Alpha Blending
+--------------
+
+[[what-we-will-know-9]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Alpha blending is the process of overlaying a *foreground* image with
+transparency over a *background* image. The transparency is often the
+fourth channel of an image ( e.g. in a transparent PNG), but it can also
+be a separate image. This transparency mask is often called the *alpha
+mask* or the *alpha matte*.
+
+The math behind alpha blending is straight forward. At *every pixel* of
+the image, we need to combine the foreground image color
+image:https://latex.codecogs.com/png.latex?(F)[] and the background image color image:https://latex.codecogs.com/png.latex?(B)[] using
+the alpha mask image:https://latex.codecogs.com/png.latex?(\alpha)[].
+
+image:https://latex.codecogs.com/png.latex?I = \alpha F + (1-\alpha)B[]
+
+From the equation above, you can make the following observations.
+
+* When image:https://latex.codecogs.com/png.latex?\alpha = 0[], the output pixel color is the
+background.
+* When image:https://latex.codecogs.com/png.latex?\alpha = 1[], the output pixel color is simply the
+foreground.
+* When image:https://latex.codecogs.com/png.latex?0 < \alpha < 1[] the output pixel color is a mix of
+the background and the foreground. For realistic blending, the boundary
+of the alpha mask usually has pixels that are between 0 and 1.
+
+[[lets-code-9]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read images.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path1 = '../../img/chair-1.png'
+    path2 = '../../img/dog-main-1.png'
+    path3 = '../../img/dog-alpha-1.png'
+
+    if os.path.isfile(path1):
+        background = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Background image has been read sucessfully...")
+    else:
+        print("[INFO] The file '" + path1 + "' does not exist.")
+        sys.exit(0)
+
+    if os.path.isfile(path2):
+        foreground = cv2.imread(path2, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Foreground image has been read sucessfully...")
+    else:
+        print("[INFO] The file '" + path2 + "' does not exist.")
+        sys.exit(0)
+
+    if os.path.isfile(path3):
+        alphaMask = cv2.imread(path3, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Alpha Mask image has been read sucessfully...")
+    else:
+        print("[INFO] The file '" + path3 + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Check whether input images are in identical size.
++
+[source,python]
+-------------------------------------------------------------------------------
+    if foreground.shape != background.shape or background.shape != alphaMask.shape:
+        print(
+            "[INFO] Image sizes are not identical, resizing possible but not recommended."
+        )
+        print("[INFO] Aborting program...")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+4.  Make a copy of alpha mask image to later use, main one will be
+normalized to keep intensity between 0 and 1. And create a blank output
+image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    alphaCpy = alphaMask
+    rows, cols = background.shape
+    output = np.zeros((rows, cols), dtype='float')
+-------------------------------------------------------------------------------
+5.  Convert images form image:https://latex.codecogs.com/png.latex?uint8[] to image:https://latex.codecogs.com/png.latex?float[]. And
+normalize the alpha mask to keep intensity between 0 and 1.
++
+[source,python]
+-------------------------------------------------------------------------------
+    foreground = foreground.astype(float)
+    background = background.astype(float)
+    alphaMask = alphaMask.astype(float) / 255
+-------------------------------------------------------------------------------
+6.  Iterate over every pixel and create new pixels based on the
+equation.
++
+[source,python]
+-------------------------------------------------------------------------------
+    print("[INFO] Blending on progress...")
+    for row in range(rows):
+        for col in range(cols):
+            tmp = alphaMask[row, col] * foreground[row, col] + \
+                    (1 - alphaMask[row, col]) * background[row, col]
+            output[row, col] = max(0, min(tmp, 255))
+    print("[INFO] Done...")
+-------------------------------------------------------------------------------
+7.  Plot background image, foreground image, alpha mask image and the
+output result image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = [
+        'Background Image', 'Foreground Image', 'Alpha Mask', 'Output Image'
+    ]
+    imgarr = [background, foreground, alphaCpy, output]
+    for i in range(4):
+        plt.subplot(2, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-9]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[text-output-9]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Background image has been read sucessfully...
+[INFO] Foreground image has been read sucessfully...
+[INFO] Alpha Mask image has been read sucessfully...
+[INFO] Blending on progress...
+[INFO] Done...
+[INFO] All operations finished successfully...
+....
+
+[[image-output-9]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/alpha-blending.png[Use of alpha mask to
+overlap an foreground image over another background image.]
+

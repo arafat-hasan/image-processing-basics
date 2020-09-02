@@ -1,0 +1,127 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[bit-plane-slicing]]
+Bit Plane Slicing
+-----------------
+
+[[what-we-will-know-12]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+For an 8-bit image, a pixel value of 0 is represented as
+image:https://latex.codecogs.com/png.latex?00000000[] in binary form and 255 is encoded as
+image:https://latex.codecogs.com/png.latex?11111111[]. Here, the leftmost bit is known as the most
+significant bit (MSB) as it contributes the maximum. e.g. if MSB of
+image:https://latex.codecogs.com/png.latex?11111111[] is changed to 0 (i.e. image:https://latex.codecogs.com/png.latex?01111111[]),
+then the value changes from 255 to 127. Similarly, rightmost bit is
+known as Least significant bit (LSB).
+
+In Bit-plane slicing, we divide the image into bit planes. This is done
+by first converting the pixel values in the binary form and then
+dividing it into bit planes.
+
+For simplicity let’s take a image:https://latex.codecogs.com/png.latex?3 \times 3[], 3-bit image as
+shown below. We know that the pixel values for 3-bit can take values
+between 0 to 7.
+
+image:images/bit-plane-slicing.png[Bit Plane Slicing]
+
+[[lets-code-12]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/coins.jpg'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Create bit planes bitwise operation and append them in a list.
++
+[source,python]
+-------------------------------------------------------------------------------
+    out = []
+    for k in range(0, 8):
+        # create an image for each k bit plane
+        plane = np.full((img.shape[0], img.shape[1]), 2**k, np.uint8)
+        # execute bitwise and operation
+        res = cv2.bitwise_and(plane, img)
+        # multiply ones (bit plane sliced) with 255 just for better visualization
+        x = res * 255
+        # append to the output list
+        out.append(x)
+-------------------------------------------------------------------------------
+4.  Arrange the list of images of planes to show perfectly.
++
+[source,python]
+-------------------------------------------------------------------------------
+    finalv = cv2.hconcat([out[3], out[2], out[1], out[0]])
+    finalr = cv2.hconcat([out[7], out[6], out[5], out[4]])
+    # Vertically concatenate
+    final = cv2.vconcat([finalr, finalv])
+-------------------------------------------------------------------------------
+5.  Show the image planes.
++
+[source,python]
+-------------------------------------------------------------------------------
+    cv2.imshow('Bit Plane Slicing', final)
+    cv2.waitKey(0)
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-12]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-input]]
+Image Input
+^^^^^^^^^^^
+
+image:/img/coins.jpg[Image of coins as input.]
+
+[[image-output-12]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/bit-plane-slicing.png[Slice bit plane of an
+image of coins.]
+
+[[text-output-12]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations finished successfully...
+....
+

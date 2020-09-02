@@ -1,0 +1,131 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[addition-of-two-images]]
+Addition of Two Images
+----------------------
+
+[[what-we-will-know-1]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+* Take two same sized image as input.
+* Produce a third image with same size of the input image which pixels
+are sum of two input images pixels.
+
+Image addition equation is:
+
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]
+
+Here image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
+
+[[lets-code-1]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main function and read images
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path1 = '../../img/rectangle-1.png'
+    path2 = '../../img/rectangle-2.png'
+
+    if os.path.isfile(path1):
+        img1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] First image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path1 + "' does not exist.")
+        sys.exit(0)
+
+    if os.path.isfile(path2):
+        img2 = cv2.imread(path2, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Second image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path2 + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Check whether input images are in identical size, if not then resize
+one of them. Image ratio may change. Better use same sized image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    if img1.shape != img2.shape:
+        print("Image sizes are not identical, resizing second image.")
+        img2 = cv2.resize(img2, img1.shape[1], img1.shape[2])
+-------------------------------------------------------------------------------
+4.  Get image size and create a blank image as output.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img1.shape
+    output = np.zeros((rows, cols), dtype='uint8')
+-------------------------------------------------------------------------------
+5.  Iterate over the pixels and add individual pixel to get output.
++
+[source,python]
+-------------------------------------------------------------------------------
+    for row in range(rows):
+        for col in range(cols):
+            tmp = int(img1[row, col]) + int(img2[row, col])
+            output[row, col] = max(0, min(tmp, 255))
+-------------------------------------------------------------------------------
+6.  Plot two input images and an output image as addition result.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['First Input Image', 'Second Input Image', 'Output Image']
+    imgarr = [img1, img2, output]
+    for i in range(3):
+        plt.subplot(1, 3, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-1]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-1]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/addition.png[Addition of two images.]
+
+[[text-output-1]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] First image has been read successfully...
+[INFO] Second image has been read successfully...
+[INFO] All operations finished successfully...
+....
+

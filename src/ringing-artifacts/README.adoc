@@ -1,0 +1,145 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[ringing-artifacts]]
+Ringing Artifacts
+-----------------
+
+[[what-we-will-know-21]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+* Take two same sized image as input.
+* Produce a third image with same size of the input image which pixels
+are sum of two input images pixels.
+
+Image ringing-artifacts equation is
+image:https://latex.codecogs.com/png.latex?g(x, y) = f_1(x, y) + f_2(x, y)[]. Here
+image:https://latex.codecogs.com/png.latex?f_1(x, y)[] and image:https://latex.codecogs.com/png.latex?f_2(x, y)[] are two input images
+and image:https://latex.codecogs.com/png.latex?g(x, y)[] is output image.
+
+[[lets-code-21]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import numpy as np
+import cv2
+from matplotlib import pyplot as plt
+import os
+-------------------------------------------------------------------------------
+2.  Start main function and read images.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/aerials/2.2.02.tiff'
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Check whether input images are in identical size.
++
+[source,python]
+-------------------------------------------------------------------------------
+    mask = np.zeros((rows, cols, 2), np.uint8)
+
+    outputImgArr = [img, magnitudeSpectrum]
+    maskSize = [5, 15, 25, 35, 50, 80]
+-------------------------------------------------------------------------------
+4.  Get image size and create a blank image as output.
++
+[source,python]
+-------------------------------------------------------------------------------
+    dft = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
+    dft_shift = np.fft.fftshift(dft)
+    magnitudeSpectrum = 20 * np.log(
+        cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1]))
+-------------------------------------------------------------------------------
+5.  Iterate over the pixels and add individual pixel to output.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    crow, ccol = int(rows / 2), int(cols / 2)
+    # create a mask first, center square is 1, remaining all zeros
+    mask = np.zeros((rows, cols, 2), np.uint8)
+-------------------------------------------------------------------------------
+6.  Plot two input images and an output image as ringing-artifacts
+result.
++
+[source,python]
+-------------------------------------------------------------------------------
+    outputImgArr = [img, magnitudeSpectrum]
+    maskSize = [5, 15, 25, 35, 50, 80]
+    titles = ['Input Image', "Magnitude Spectrum"
+             ] + ['Mask Size: ' + str(i) for i in maskSize]
+-------------------------------------------------------------------------------
+7.  Plot two input images and an output image as ringing-artifacts
+result.
++
+[source,python]
+-------------------------------------------------------------------------------
+    for n in maskSize:
+        mask[crow - n:crow + n, ccol - n:ccol + n] = 1
+        # apply mask and inverse DFT
+        fshift = dft_shift * mask
+        f_ishift = np.fft.ifftshift(fshift)
+        imgTmp = cv2.idft(f_ishift)
+        outputImgArr.append(cv2.magnitude(imgTmp[:, :, 0], imgTmp[:, :, 1]))
+-------------------------------------------------------------------------------
+8.  Plot two input images and an output image as ringing-artifacts
+result.
++
+[source,python]
+-------------------------------------------------------------------------------
+        outputImgArr.append(cv2.magnitude(imgTmp[:, :, 0], imgTmp[:, :, 1]))
+
+    for i in range(len(outputImgArr)):
+        plt.subplot(2, 4, i + 1)
+        plt.imshow(outputImgArr[i], cmap='gray')
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations completed successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-21]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-21]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/ringing-artifacts.png[Showing ringing artifact
+on an aerial image.]
+
+[[text-output-21]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations completed successfully...
+....

@@ -1,0 +1,144 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+
+
+
+ 
+
+
+
+
+
+[[intensity-level-slicing]]
+Intensity Level Slicing
+-----------------------
+
+[[what-we-will-know-11]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Intensity level slicing means highlighting a specific range of
+intensities in an image. In other words, we segment certain gray level
+regions from the rest of the image.
+
+Suppose in an image, your region of interest always take value between
+say 80 to 150. So, intensity level slicing highlights this range and now
+instead of looking at the whole image, one can now focus on the
+highlighted region of interest.
+
+Since, one can think of it as piecewise linear transformation function
+so this can be implemented in several ways. Here, we will discuss the
+two basic type of slicing that is more often used.
+
+1.  In the first type, we display the desired range of intensities in
+white and suppress all other intensities to black or vice versa. This
+results in a binary image. The transformation function for both the
+cases is shown below.
++
++
+image:images/binary-slicing.png[image]
+2.  In the second type, we brighten or darken the desired range of
+intensities(a to b as shown below) and leave other intensities unchanged
+or vice versa. The transformation function for both the cases, first
+where the desired range is changed and second where it is unchanged, is
+shown below.
++
++
+image:images/sliced.png[image]
+
+[[lets-code-11]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/cameraman.tif'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create two blank image identical in size
+with input image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    outputWithBack = np.zeros((rows, cols), dtype='uint8')
+    outputWithoutBack = np.zeros((rows, cols), dtype='uint8')
+-------------------------------------------------------------------------------
+4.  Iterate over every pixel and slice intensity.
++
+[source,python]
+-------------------------------------------------------------------------------
+    min_range = 5
+    max_range = 55
+    for row in range(rows):
+        for col in range(cols):
+            if img[row, col] > min_range and img[row, col] < max_range:
+                outputWithBack[row, col] = 255
+                outputWithoutBack[row, col] = 255
+            else:
+                outputWithBack[row, col] = img[row, col]
+                outputWithoutBack[row, col] = 0
+-------------------------------------------------------------------------------
+5.  Plot input image and resulted with background and without background
+images using image:https://latex.codecogs.com/png.latex?matplotlib[].
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = [
+        'Input Image', 'Intensity-level Slicing with Background',
+        'Intensity-level Slicing without Background'
+    ]
+    imgarr = [img, outputWithBack, outputWithoutBack]
+    for i in range(3):
+        plt.subplot(1, 3, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-11]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-11]]
+Image Output
+^^^^^^^^^^^^
+
+image:/imgOut/intensity-level-slicing.png[Slice intensity of
+a cameraman image.]
+
+[[text-output-11]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations finished successfully...
+....
+
