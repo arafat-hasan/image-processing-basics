@@ -125,7 +125,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/brightness.png[Change in brightness on Lenna’s
+image:/imgOut/brightness.png[Change in brightness on Lenna’s
 image.]
 
 [[text-output-4]]

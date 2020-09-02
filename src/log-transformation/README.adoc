@@ -110,7 +110,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/log-transformation.png[Log transformation over
+image:/imgOut/log-transformation.png[Log transformation over
 an aircraft image.]
 
 [[text-output-10]]

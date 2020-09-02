@@ -199,7 +199,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/RGB-to-gray-and-binary.png[RGB to grayscale
+image:/imgOut/RGB-to-gray-and-binary.png[RGB to grayscale
 and binary conversion.]
 
 [[text-output-7]]

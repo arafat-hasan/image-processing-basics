@@ -170,6 +170,6 @@ Text Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/alpha-blending.png[Use of alpha mask to
+image:/imgOut/alpha-blending.png[Use of alpha mask to
 overlap an foreground image over another background image.]
 

@@ -100,7 +100,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/negation.png[Negative Transformation over
+image:/imgOut/negation.png[Negative Transformation over
 pollen image to enhance details.]
 
 [[text-output-8]]

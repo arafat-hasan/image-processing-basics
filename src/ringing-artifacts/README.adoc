@@ -131,7 +131,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/ringing-artifacts.png[Showing ringing artifact
+image:/imgOut/ringing-artifacts.png[Showing ringing artifact
 on an aerial image.]
 
 [[text-output-21]]

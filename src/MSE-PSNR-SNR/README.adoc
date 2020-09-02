@@ -200,7 +200,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/MSE-PSNR-SNR.png[Applying MSE, PSNR and SNR on
+image:/imgOut/MSE-PSNR-SNR.png[Applying MSE, PSNR and SNR on
 various noisy and restored images.]
 
 [[text-output-16]]

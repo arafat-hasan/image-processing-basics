@@ -148,7 +148,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/weber-ratio.png[Use of Weber’s ratio to detect
+image:/imgOut/weber-ratio.png[Use of Weber’s ratio to detect
 background edges.]
 
 [[text-output-17]]

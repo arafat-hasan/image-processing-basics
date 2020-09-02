@@ -150,7 +150,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/detect-edge-using-canny-sobel-prewitt.png[Apply
+image:/imgOut/detect-edge-using-canny-sobel-prewitt.png[Apply
 of various edge detection operator.]
 
 [[text-output-18]]

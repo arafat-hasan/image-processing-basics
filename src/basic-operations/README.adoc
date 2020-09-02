@@ -101,7 +101,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/NewHouseImage.png[This image has been read,
+image:/imgOut/NewHouseImage.png[This image has been read,
 written and shown.]
 
 [[text-output]]

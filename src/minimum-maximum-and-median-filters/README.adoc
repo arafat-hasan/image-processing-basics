@@ -165,7 +165,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/minimum-maximum-and-median-filters.png[Median,
+image:/imgOut/minimum-maximum-and-median-filters.png[Median,
 minimum and maximum filtering (Input image at upside, output at
 downside).]
 

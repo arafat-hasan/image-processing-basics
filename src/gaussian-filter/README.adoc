@@ -120,7 +120,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/gaussian-filter.png[Apply of Gaussian
+image:/imgOut/gaussian-filter.png[Apply of Gaussian
 filtering on Lenna’s noisy image.]
 
 [[text-output-14]]

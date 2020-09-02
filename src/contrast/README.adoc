@@ -121,7 +121,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/contrast.png[Change in contrast on a desert
+image:/imgOut/contrast.png[Change in contrast on a desert
 image.]
 
 [[text-output-5]]

@@ -116,7 +116,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/addition.png[Addition of two images.]
+image:/imgOut/addition.png[Addition of two images.]
 
 [[text-output-1]]
 Text Output

@@ -121,7 +121,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/average-filter.png[Apply of average filtering
+image:/imgOut/average-filter.png[Apply of average filtering
 on Lenna’s noisy image.]
 
 [[text-output-13]]

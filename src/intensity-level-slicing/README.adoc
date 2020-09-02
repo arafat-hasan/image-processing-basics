@@ -129,7 +129,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/intensity-level-slicing.png[Slice intensity of
+image:/imgOut/intensity-level-slicing.png[Slice intensity of
 a cameraman image.]
 
 [[text-output-11]]

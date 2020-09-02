@@ -114,7 +114,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/multiply.png[Multiplication of two images.]
+image:/imgOut/multiply.png[Multiplication of two images.]
 
 [[text-output-2]]
 Text Output

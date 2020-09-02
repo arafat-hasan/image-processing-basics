@@ -12,4 +12,4 @@
 Use of subtraction
 -------------------
 
-image:imgOut/addition.png[]
+image:/imgOut/addition.png[]

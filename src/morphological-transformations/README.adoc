@@ -93,7 +93,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/morphological-transformations.png[Various
+image:/imgOut/morphological-transformations.png[Various
 morphological transformations on a finger print image.]
 
 [[text-output-20]]

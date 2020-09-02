@@ -106,13 +106,13 @@ Input and Output
 Image Input
 ^^^^^^^^^^^
 
-image:img/coins.jpg[Image of coins as input.]
+image:/img/coins.jpg[Image of coins as input.]
 
 [[image-output-12]]
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/bit-plane-slicing.png[Slice bit plane of an
+image:/imgOut/bit-plane-slicing.png[Slice bit plane of an
 image of coins.]
 
 [[text-output-12]]

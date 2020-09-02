@@ -183,7 +183,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/line-detection.png[Line detection of an
+image:/imgOut/line-detection.png[Line detection of an
 images.]
 
 [[text-output-19]]

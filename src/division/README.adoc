@@ -119,7 +119,7 @@ Input and Output
 Image Output
 ^^^^^^^^^^^^
 
-image:imgOut/division.png[Division of two images.]
+image:/imgOut/division.png[Division of two images.]
 
 [[text-output-3]]
 Text Output
