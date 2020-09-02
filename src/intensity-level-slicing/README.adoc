@@ -38,7 +38,7 @@ results in a binary image. The transformation function for both the
 cases is shown below.
 +
 +
-image:images/binary-slicing.png[image]
+image:/docimg/binary-slicing.png[image]
 2.  In the second type, we brighten or darken the desired range of
 intensities(a to b as shown below) and leave other intensities unchanged
 or vice versa. The transformation function for both the cases, first
@@ -46,7 +46,7 @@ where the desired range is changed and second where it is unchanged, is
 shown below.
 +
 +
-image:images/sliced.png[image]
+image:/docimg/sliced.png[image]
 
 [[lets-code-11]]
 Let's Code

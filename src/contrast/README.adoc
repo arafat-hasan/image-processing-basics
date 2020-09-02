@@ -23,7 +23,7 @@ Contrast is the difference in luminance or color that makes an object
 can be simply explained as the difference between maximum and minimum
 pixel intensity in an image.
 
-What We Will Know of this experiment is to:
+What we will know of this experiment is to:
 
 * Increase the contrast of an image.
 * Calculate contrast of an image.
@@ -69,7 +69,7 @@ constant.
     contrastConstant = 1.7
 -------------------------------------------------------------------------------
 4.  Iterate over all pixels and multiply the constant with each pixel
-and bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
+and bond the pixels in range +[0, 255]+.
 +
 [source,python]
 -------------------------------------------------------------------------------

@@ -35,7 +35,7 @@ For simplicity let’s take a image:https://latex.codecogs.com/png.latex?3 \time
 shown below. We know that the pixel values for 3-bit can take values
 between 0 to 7.
 
-image:images/bit-plane-slicing.png[Bit Plane Slicing]
+image:/docimg/bit-plane-slicing.png[Bit Plane Slicing]
 
 [[lets-code-12]]
 Let's Code

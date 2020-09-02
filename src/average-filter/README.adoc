@@ -29,7 +29,7 @@ intensity levels in the neighborhood defined by the filter mask.
 * An important application of spatial averaging is to blur an image for
 image for the purpose of getting a gross representation of objects of
 interest , such that the intensity of smaller objects blends with the
-background and larger objects become ``blob like'' and easy to detect.
+background and larger objects become _blob like_ and easy to detect.
 * The size of the mask establishes the relative size of the objects that
 will be blended with the background.
 

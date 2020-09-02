@@ -73,7 +73,7 @@ constant.
     brightnessConstant = 70
 -------------------------------------------------------------------------------
 4.  Iterate over all pixels and decrease intensity of each pixel and
-bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
+bond the pixels in range +[0, 255]+.
 +
 [source,python]
 -------------------------------------------------------------------------------
