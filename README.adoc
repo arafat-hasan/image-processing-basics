@@ -13,60 +13,51 @@
 Image Processing Course
 =======================
 
-ifdef::env-github,env-browser[:outfilesuffix: .adoc]
+* link:/src/basic-operations/README.adoc[Basic Operations on an Image]
 
-See the <<README#,README>>.
+* link:/src/addition/README.adoc[Addition of Two Images]
 
-We could also write the link as link:/src/basic-operations/README{outfilesuffix}[README].
+* link:/src/use-of-subtraction/README.adoc[Use of subtraction]
 
+* link:/src/multiplication/README.adoc[Multiplication of Two Images]
 
+* link:/src/division/README.adoc[Division of Two Images]
 
+* link:/src/brightness/README.adoc[Brightness Increasing and Calculation]
 
-include::src/basic-operations/README.adoc[Basic Operations on an Image]
+* link:/src/contrast/README.adoc[Image Contrast Changing and Calculation]
 
-include::src/addition/README.adoc[Addition of Two Images]
+* link:/src/RGB-to-gray-and-binary/README.adoc[Grayscale and Binary Conversion]
 
-include::src/use-of-subtraction/README.adoc[Use of subtraction]
+* link:/src/reading-and-writing-of-color-image/README.adoc[Reading and Writing of Color Image]
 
-include::src/multiplication/README.adoc[Multiplication of Two Images]
+* link:/src/gaussian-filter/README.adoc[Gaussian Filter]
 
-include::src/division/README.adoc[Division of Two Images]
+* link:/src/average-filter/README.adoc[Average Filtering]
 
-include::src/brightness/README.adoc[Brightness Increasing and Calculation]
+* link:/src/minimum-maximum-and-median-filters/README.adoc[Minimum, Maximum and Median Filter]
 
-include::src/contrast/README.adoc[Image Contrast Changing and Calculation]
+* link:/src/alpha-blending/README.adoc[Alpha Blending]
 
-include::src/RGB-to-gray-and-binary/README.adoc[Grayscale and Binary Conversion]
+* link:/src/bit-plane-slicing/README.adoc[Bit Plane Slicing]
 
-include::src/reading-and-writing-of-color-image/README.adoc[Reading and Writing of Color Image]
+* link:/src/intensity-level-slicing/README.adoc[Intensity Level Slicing]
 
-include::src/gaussian-filter/README.adoc[Gaussian Filter]
+* link:/src/morphological-transformations/README.adoc[Morphological Transformations]
 
-include::src/average-filter/README.adoc[Average Filtering]
+* link:/src/log-transformation/README.adoc[Log Transformation]
 
-include::src/minimum-maximum-and-median-filters/README.adoc[Minimum, Maximum and Median Filter]
+* link:/src/negation/README.adoc[Negative Transformation]
 
-include::src/alpha-blending/README.adoc[Alpha Blending]
+* link:/src/detect-edge-using-canny-sobel-prewitt/README.adoc[Canny, Sobel and Prewitt]
 
-include::src/bit-plane-slicing/README.adoc[Bit Plane Slicing]
+* link:/src/line-detection/README.adoc[Line Detection]
 
-include::src/intensity-level-slicing/README.adoc[Intensity Level Slicing]
+* link:/src/ringing-artifacts/README.adoc[Ringing Artifacts]
 
-include::src/morphological-transformations/README.adoc[Morphological Transformations]
+* link:/src/MSE-PSNR-SNR/README.adoc[Calculate MSE, SNR and PSNR]
 
-include::src/log-transformation/README.adoc[Log Transformation]
+* link:/src/anisotropic-diffusion/README.adoc[Anisotropic Diffusion]
 
-include::src/negation/README.adoc[Negative Transformation]
-
-include::src/detect-edge-using-canny-sobel-prewitt/README.adoc[Canny, Sobel and Prewitt]
-
-include::src/line-detection/README.adoc[Line Detection]
-
-include::src/ringing-artifacts/README.adoc[Ringing Artifacts]
-
-include::src/MSE-PSNR-SNR/README.adoc[Calculate MSE, SNR and PSNR]
-
-include::src/anisotropic-diffusion/README.adoc[Anisotropic Diffusion]
-
-include::src/weber-ratio/README.adoc[Use of Weber’s Ratio]
+* link:/src/weber-ratio/README.adoc[Use of Weber’s Ratio]
 
