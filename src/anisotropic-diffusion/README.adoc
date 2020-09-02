@@ -1,0 +1,20 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+Anisotropic Diffusion
+---------------------
+
+Compare edge detection using gaussian and anisotropic diffusion. The output is animated.
+
+Python 2 code, I am working on python 3.
+
+
+image:imageOut/anisotropic-diffusion.gif[]

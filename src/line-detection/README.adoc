@@ -1,0 +1,201 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+
+[[line-detection]]
+Line Detection
+--------------
+
+[[what-we-will-know-19]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Line detection is an algorithm that takes a collection of n edge points
+and finds all the lines on which these edge points lie. In a convolution
+based technique, the line detector operator consists of a convolution
+masks tuned to detect the presence of lines of a particular width n and
+a θ orientation. Here are the four convolution masks to detect
+horizontal, vertical, oblique (+45 degrees), and oblique (-45 degrees)
+lines in an image.
+
+- Horizontal mask (image:https://latex.codecogs.com/png.latex?R_1[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}-1&-1&-1\\2&2&2\\-1&-1&-1\end{bmatrix}[]
+
+
+- Vertical (image:https://latex.codecogs.com/png.latex?R_3[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}-1&2&-1 \\-1&2&-1 \\-1&2&-1\end{bmatrix}[]
+
+
+- Oblique (+45 degrees)(image:https://latex.codecogs.com/png.latex?R_2[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}-1&-1&2 \\-1&2&-1 \\2&-1&-1\end{bmatrix}[]
+
+
+- Oblique (-45 degrees)(image:https://latex.codecogs.com/png.latex?R_4[])
+
+image:https://latex.codecogs.com/png.latex?\begin{bmatrix}2&-1&-1 \\-1&2&-1 \\-1&-1&2\end{bmatrix}[]
+
+
+In practice, masks are run over the image and the responses are combined
+given by the following equation:
+image:https://latex.codecogs.com/png.latex?R(x, y) = max(|R_1 (x, y)|, |R_2 (x, y)|, |R_3 (x, y)|, |R_4 (x, y)|)[]
+If image:https://latex.codecogs.com/png.latex?R(x, y) > T[], then discontinuity.
+
+[[lets-code-19]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+from skimage.exposure import rescale_intensity
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Define custom convolution method to run the filters over.
++
+[source,python]
+-------------------------------------------------------------------------------
+def convolve(image, kernel):
+	(iH, iW) = image.shape[:2]
+	(kH, kW) = kernel.shape[:2]
+
+	pad = (kW - 1) // 2
+	image = cv2.copyMakeBorder(image, pad, pad, pad, pad,
+		cv2.BORDER_REPLICATE)
+	output = np.zeros((iH, iW), dtype="float32")
+
+	for y in np.arange(pad, iH + pad):
+		for x in np.arange(pad, iW + pad):
+			roi = image[y - pad:y + pad + 1, x - pad:x + pad + 1]
+			k = (roi * kernel).sum()
+			output[y - pad, x - pad] = k
+
+	output = rescale_intensity(output, in_range=(0, 255))
+	output = (output * 255).astype("uint8")
+
+	return output
+-------------------------------------------------------------------------------
+3.  Start main function and read images.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/Testbuilding.png'
+
+    if os.path.isfile(path):
+        image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print ("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+4.  Creating horizontal, vertical and oblique masks.
++
+[source,python]
+-------------------------------------------------------------------------------
+    horizontalMask = np.array((
+            [-1, -1, -1],
+            [2, 2, 2],
+            [-1, -1, -1]), dtype="int")
+
+    verticalMask = np.array((
+            [-1, 2, -1],
+            [-1, 2, -1],
+            [-1, 2, -1]), dtype="int")
+
+    oblique45P = np.array((
+            [-1, -1, 2],
+            [-1, 2, -1],
+            [2, -1, -1]), dtype="int")
+
+    oblique45N = np.array((
+            [2, -1, -1],
+            [-1, 2, -1],
+            [-1, -1, 2]), dtype="int")
+-------------------------------------------------------------------------------
+5.  Construct a kernel bank, a list of kernels we are going to apply
+using custom `convole` function.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # construct the kernel bank, a list of kernels we're going
+    # to apply using custom `convole` function
+    kernelBank = (
+            ("Horizontal Mask", horizontalMask),
+            ("Vertical Mask", verticalMask),
+            ("Oblique +45 Degree", oblique45P),
+            ("Oblique -45 Degree", oblique45N)
+    )
+-------------------------------------------------------------------------------
+6.  Loop over the kernels and apply them.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # loop over the kernels
+    convoleOutput = []
+    titles = []
+    for (kernelName, kernel) in kernelBank:
+        print("[INFO] Applying {} kernel...".format(kernelName))
+        convoleOutput.append(convolve(image, kernel))
+        titles.append(kernelName)
+-------------------------------------------------------------------------------
+7.  Plot the input image and the output images.
++
+[source,python]
+-------------------------------------------------------------------------------
+    plt.subplot(2, 4, 1)
+    plt.imshow(image, cmap='gray', vmin = 0, vmax = 255)
+    plt.title("Original Image")
+    plt.xticks([]),plt.yticks([])
+
+    for i in np.arange(4, 8):
+        plt.subplot(2, 4, i+1)
+        plt.imshow(convoleOutput[i-4], cmap='gray', vmin = 0, vmax = 255)
+        plt.title(titles[i-4])
+        plt.xticks([]),plt.yticks([])
+    
+    plt.show()
+
+    print("[INFO] All operations completed successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-19]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-19]]
+Image Output
+^^^^^^^^^^^^
+
+image:imgOut/line-detection.png[Line detection of an
+images.]
+
+[[text-output-19]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] Applying Horizontal Mask kernel...
+[INFO] Applying Vertical Mask kernel...
+[INFO] Applying Oblique +45 Degree kernel...
+[INFO] Applying Oblique -45 Degree kernel...
+[INFO] All operations completed successfully...
+....
+

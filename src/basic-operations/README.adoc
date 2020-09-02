@@ -1,0 +1,120 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+
+
+[[basic-operations-on-an-image]]
+Basic Operations on an Image
+----------------------------
+
+[[what-we-will-know]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+* Familiarize with IDE, environment.
+* Read, write operations of an image.
+* Basic image manipulation.
+* Iterate over image pixels.
+* Access image properties.
+* Access pixel values and modify them.
+
+Almost all the operations in this section is mainly related to `Numpy`
+rather than `OpenCV`. A good knowledge of `Numpy` is required to write
+better optimized code with `OpenCV`.
+
+[[lets-code]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+import os
+-------------------------------------------------------------------------------
+2.  Start main function and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/misc/house.tiff'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Show the image using OpenCV `imshow` method and write to disk a new
+image using `imwrite` method.
++
+[source,python]
+-------------------------------------------------------------------------------
+    cv2.imshow('Original', img)
+    cv2.imwrite('NewHouseImage.png', img)
+-------------------------------------------------------------------------------
+4.  Access an arbitrary pixel and print it.
++
+[source,python]
+-------------------------------------------------------------------------------
+    arbitraryPixel = img[2, 3]
+    print('An arbitrary Pixel: ', arbitraryPixel)
+-------------------------------------------------------------------------------
+5.  Get image dimension, height, width, channels and print them and exit
+window.
++
+[source,python]
+-------------------------------------------------------------------------------
+    dimensions = img.shape
+    height = img.shape[0]
+    width = img.shape[1]
+    channels = img.shape[2]
+
+    print('Image Dimension: ', dimensions)
+    print('Image Height: ', height)
+    print('Image Width: ', width)
+    print('Total Number of pixels :', img.size)
+
+    k = cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output]]
+Image Output
+^^^^^^^^^^^^
+
+image:imgOut/NewHouseImage.png[This image has been read,
+written and shown.]
+
+[[text-output]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+An arbitrary Pixel:  [211 222 218]
+Image Dimension:  (512, 512, 3)
+Image Height:  512
+Image Width:  512
+Total Number of pixels : 786432
+[INFO] All operations finished successfully...
+....
+

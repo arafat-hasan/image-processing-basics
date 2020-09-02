@@ -1,0 +1,137 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+[[image-contrast-changing-and-calculation]]
+Image Contrast Changing and Calculation
+---------------------------------------
+
+[[what-we-will-know-5]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Contrast is the difference in luminance or color that makes an object
+(or its representation in an image or display) distinguishable. Contrast
+can be simply explained as the difference between maximum and minimum
+pixel intensity in an image.
+
+What We Will Know of this experiment is to:
+
+* Increase the contrast of an image.
+* Calculate contrast of an image.
+
+Contrast calculation formula:
+image:https://latex.codecogs.com/png.latex?Contrast= Maximum\ pixel\ intensity - Minimum\ pixel\ intensity[]
+
+[[lets-code-5]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/misc/7.1.01.tiff'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create a blank image and set a contrast
+constant.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    output = np.zeros((rows, cols), dtype='float')
+    img = img.astype(float)  # To get rid of from overflow
+    contrastConstant = 1.7
+-------------------------------------------------------------------------------
+4.  Iterate over all pixels and multiply the constant with each pixel
+and bond the pixels in range image:https://latex.codecogs.com/png.latex?[0, 255][].
++
+[source,python]
+-------------------------------------------------------------------------------
+    for row in range(rows):
+        for col in range(cols):
+            tmp = img[row, col] * contrastConstant
+            output[row, col] = max(0, min(tmp, 255))
+-------------------------------------------------------------------------------
+5.  A more pythonic way to do the previous step is written here as
+comment. No need to iterate over pixels, python and numpy do the stuffs
+for us.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # This is more pythonic way for changing  brightness
+    # output = img * contrastConstant  # No need to iterate over every pixel
+    # lowerbound, upperbound = 0, 255
+    # np.clip(output, lowerbound, upperbound, out=output)  # Numpy do the bounding
+-------------------------------------------------------------------------------
+6.  Print original calculated contrast and changed contrast.
++
+[source,python]
+-------------------------------------------------------------------------------
+    print('Original Contrast: ', np.amax(img) - np.amin(img))
+    print('Increased Contrast: ', np.amax(output) - np.amin(output))
+-------------------------------------------------------------------------------
+7.  Plot main input image and contrast changed image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Original Contrast', 'Increased Contrast']
+    imgarr = [img, output]
+    for i in range(2):
+        plt.subplot(1, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-5]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-5]]
+Image Output
+^^^^^^^^^^^^
+
+image:imgOut/contrast.png[Change in contrast on a desert
+image.]
+
+[[text-output-5]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+Original Contrast:  247.0
+Increased Contrast:  249.9
+[INFO] All operations finished successfully...
+....
+

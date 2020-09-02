@@ -1,0 +1,115 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+[[negative-transformation]]
+Negative Transformation
+-----------------------
+
+[[what-we-will-know-8]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+Black and white image inversion refers to an image processing technique
+where light areas are mapped to dark, and dark areas are mapped to
+light. In other words, after image inversion black becomes white and
+white becomes black. An inverted black and white image can be thought of
+as a digital negative of the original image.
+
+This is particularly useful for enhancing white or gray details embedded
+in dark regions of an image.
+
+image:https://latex.codecogs.com/png.latex?I_{inverted}(x, y) = 255 - I(x, y)[]
+
+[[lets-code-8]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import sys
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+    path = '../../img/pollen-image-plants.jpg'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create a blank image identical in size with
+input image.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols = img.shape
+    output = np.zeros((rows, cols), dtype='uint8')
+-------------------------------------------------------------------------------
+4.  Iterate over every pixel and apply the negation equation to
+determine output pixel.
++
+[source,python]
+-------------------------------------------------------------------------------
+    for row in range(rows):
+        for col in range(cols):
+            output[row, col] = 255 - img[row, col]
+-------------------------------------------------------------------------------
+5.  Plot input image and result output image using
+image:https://latex.codecogs.com/png.latex?matplotlib[].
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = ['Input Image', 'Negative Image']
+    imgarr = [img, output]
+    for i in range(2):
+        plt.subplot(1, 2, i + 1)
+        plt.imshow(imgarr[i], cmap='gray', vmin=0, vmax=255)
+        plt.title(titles[i])
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-8]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-8]]
+Image Output
+^^^^^^^^^^^^
+
+image:imgOut/negation.png[Negative Transformation over
+pollen image to enhance details.]
+
+[[text-output-8]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations finished successfully...
+....
+
+

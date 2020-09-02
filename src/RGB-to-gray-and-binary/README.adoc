@@ -1,0 +1,214 @@
+:Author:    Arafat Hasan
+:Email:     <opendoor.arafat[at]gmail[dot]com>
+:Date:      August 29, 2020
+:Revision:  v1.0
+:sectnums:
+:toc: macro
+:toc-title: Table of Content 
+:toclevels: 3
+:doctype: book
+
+
+
+[[grayscale-and-binary-conversion]]
+Grayscale and Binary Conversion
+-------------------------------
+
+[[what-we-will-know-7]]
+What We Will Know
+~~~~~~~~~~~~~~~~~
+
+An RGB image can be viewed as three different images(a red scale image,
+a green scale image and a blue scale image) stacked on top of each
+other, and when fed into the red, green and blue inputs of a color
+monitor, it produces a color image on the screen.
+
+An RGB image is sometimes referred to as a true color image as the
+precision with which a real-life image can be replicated has led to the
+nickname _true color image_.
+
+[[grayscale-conversion]]
+Grayscale Conversion
+^^^^^^^^^^^^^^^^^^^^
+
+There are two methods to convert an color image into a grayscale image.
+Both has their own merits and demerits. The methods are:
+
+* Average method
+* Weighted method or luminosity method
+
+[[average-method]]
+Average method
+++++++++++++++
+
+Average method is the most simple one. You just have to take the average
+of three colors. Since its an RGB image, so it means that you have add r
+with g with b and then divide it by 3 to get your desired grayscale
+image.
+
+Its done in this way.
+
+image:https://latex.codecogs.com/png.latex?Grayscale = (R + G + B / 3)[]
+
+
+[[weighted-method-or-luminosity-method]]
+Weighted method or luminosity method
+++++++++++++++++++++++++++++++++++++
+
+Since red color has more wavelength of all the three colors, and green
+is the color that has not only less wavelength then red color but also
+green is the color that gives more soothing effect to the eyes.
+
+It means that we have to decrease the contribution of red color, and
+increase the contribution of the green color, and put blue color
+contribution in between these two.
+
+So the new equation that form is:
+
+image:https://latex.codecogs.com/png.latex?New \ grayscale \ image = ( (0.299 \times R) + (0.587 \times G) + (0.144 \times B) ).[]
+
+According to this equation, Red has contribute 30%, Green has
+contributed 59% which is greater in all three colors and Blue has
+contributed 11%.
+
+[[binary-conversion]]
+Binary Conversion
+^^^^^^^^^^^^^^^^^
+
+To convert RGB image to Binary image, we have to the RGB image into
+Grayscale image first. Then we set threshold value. Then we use this
+equation :
+
+image:https://latex.codecogs.com/png.latex?y=
+   \begin{cases}
+     1, & \text{if}\ y \geq threshhold \\
+     0, & \text{otherwise}
+   \end{cases}[]
+
+[[lets-code-7]]
+Let's Code
+~~~~~~~~~~
+
+1.  Import python libraries for image processing and other stuffs.
++
+[source,python]
+-------------------------------------------------------------------------------
+import cv2
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+-------------------------------------------------------------------------------
+2.  Start main code section and read image.
++
+[source,python]
+-------------------------------------------------------------------------------
+if __name__ == '__main__':
+
+    path = '../../img/misc/4.1.08.tiff'
+
+    if os.path.isfile(path):
+        img = cv2.imread(path)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        print("[INFO] Image has been read successfully...")
+    else:
+        print("[INFO] The file '" + path + "' does not exist.")
+        sys.exit(0)
+-------------------------------------------------------------------------------
+3.  Get input image size and create two grayscale and a binary dump
+image of that size. Set thresh value.
++
+[source,python]
+-------------------------------------------------------------------------------
+    rows, cols, ch = img.shape
+    img = img.astype('float')
+    imgGraygen = np.zeros((rows, cols), dtype='uint8')
+    imgGrayweighted = np.zeros((rows, cols), dtype='uint8')
+    imgBinary = np.zeros((rows, cols), dtype='bool_')
+    thresh = 170
+-------------------------------------------------------------------------------
+4.  Iterate over pixels and calculate average, weighted average and get
+binary intensity based on range.
++
+[source,python]
+-------------------------------------------------------------------------------
+    for row in range(rows):
+        for col in range(cols):
+            pixel = img[row, col]
+            avggen = int(math.ceil(pixel[0] + pixel[1] + pixel[2]) / 3)
+            avgweighted = int(
+                math.ceil(pixel[0] * 0.299 + pixel[1] * 0.587 +
+                          pixel[2] * 0.144))
+            imgGraygen[row, col] = max(0, min(avggen, 255))
+            imgGrayweighted[row, col] = max(0, min(avgweighted, 255))
+            imgBinary[row, col] = False if avgweighted > thresh else True
+-------------------------------------------------------------------------------
+5.  Convert to binary image using OpenCV library, given as comment.
++
+[source,python]
+-------------------------------------------------------------------------------
+    # ======================================================
+    # IMPLEMENTATION USING OPENCV LIBRARY
+    # ======================================================
+    # (thresh, imgBinary) = cv2.threshold(imgGrayweighted, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+-------------------------------------------------------------------------------
+6.  Show main image, grayscale images and binary image using
+`matplotlib.pyplot`.
++
+[source,python]
+-------------------------------------------------------------------------------
+    titles = [
+        'Original Image', 'Average Grayscale Image', 'Weighted Grayscale Image',
+        'Binary Image'
+    ]
+    imgarr = [img, imgGraygen, imgGrayweighted, imgBinary]
+
+    plt.subplot(1, 4, 1)
+    plt.imshow(np.uint8(imgarr[0]))
+    plt.title(titles[0])
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.subplot(1, 4, 2)
+    plt.imshow(imgarr[1], cmap='gray', vmin=0, vmax=255)
+    plt.title(titles[1])
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.subplot(1, 4, 3)
+    plt.imshow(imgarr[2], cmap='gray', vmin=0, vmax=255)
+    plt.title(titles[2])
+    plt.xticks([])
+    plt.yticks([])
+
+    plt.subplot(1, 4, 4)
+    plt.imshow(imgarr[3], cmap='binary')
+    plt.title(titles[3])
+    plt.xticks([])
+    plt.yticks([])
+    plt.show()
+
+    print("[INFO] All operations finished successfully...")
+-------------------------------------------------------------------------------
+
+[[input-and-output-7]]
+Input and Output
+~~~~~~~~~~~~~~~~
+
+[[image-output-7]]
+Image Output
+^^^^^^^^^^^^
+
+image:imgOut/RGB-to-gray-and-binary.png[RGB to grayscale
+and binary conversion.]
+
+[[text-output-7]]
+Text Output
+^^^^^^^^^^^
+
+....
+[INFO] Image has been read successfully...
+[INFO] All operations finished successfully...
+....
+
+
