@@ -49,7 +49,7 @@ image.
 
 Its done in this way.
 
-image:https://latex.codecogs.com/png.latex?Grayscale = (R + G + B / 3)[]
+image:https://latex.codecogs.com/png.latex?Grayscale = (R + G + B) / 3[]
 
 
 [[weighted-method-or-luminosity-method]]
@@ -80,11 +80,7 @@ To convert RGB image to Binary image, we have to the RGB image into
 Grayscale image first. Then we set threshold value. Then we use this
 equation :
 
-image:https://latex.codecogs.com/png.latex?y=
-   \begin{cases}
-     1, & \text{if}\ y \geq threshhold \\
-     0, & \text{otherwise}
-   \end{cases}[]
+image:https://latex.codecogs.com/png.latex?y= \begin{cases} 1, & \text{if}\ y \geq threshhold \\ 0, & \text{otherwise} \end{cases}[]
 
 [[lets-code-7]]
 Let's Code
