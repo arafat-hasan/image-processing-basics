@@ -2,62 +2,58 @@
 :Email:     <opendoor.arafat[at]gmail[dot]com>
 :Date:      August 29, 2020
 :Revision:  v1.0
-:sectnums:
 :gitrepo: https://github.com/arafat-hasan/oh-my-image-processing-course
-:toc: 
-:toc-title: Table of Content 
-:toclevels: 3
-:doctype: book
 
 
-Image Processing Course
-=======================
+
+Basics of Image Processing
+==========================
 
 * link:/src/basic-operations/[Basic Operations on an Image]
 
-* link:/src/addition/README.adoc[Addition of Two Images]
+* link:/src/addition/[Addition of Two Images]
 
-* link:/src/use-of-subtraction/README.adoc[Use of subtraction]
+* link:/src/use-of-subtraction/[Use of subtraction]
 
-* link:/src/multiplication/README.adoc[Multiplication of Two Images]
+* link:/src/multiplication/[Multiplication of Two Images]
 
-* link:/src/division/README.adoc[Division of Two Images]
+* link:/src/division/[Division of Two Images]
 
-* link:/src/brightness/README.adoc[Brightness Increasing and Calculation]
+* link:/src/brightness/[Brightness Increasing and Calculation]
 
-* link:/src/contrast/README.adoc[Image Contrast Changing and Calculation]
+* link:/src/contrast/[Image Contrast Changing and Calculation]
 
-* link:/src/RGB-to-gray-and-binary/README.adoc[Grayscale and Binary Conversion]
+* link:/src/RGB-to-gray-and-binary/[Grayscale and Binary Conversion]
 
-* link:/src/reading-and-writing-of-color-image/README.adoc[Reading and Writing of Color Image]
+* link:/src/reading-and-writing-of-color-image/[Reading and Writing of Color Image]
 
-* link:/src/gaussian-filter/README.adoc[Gaussian Filter]
+* link:/src/gaussian-filter/[Gaussian Filter]
 
-* link:/src/average-filter/README.adoc[Average Filtering]
+* link:/src/average-filter/[Average Filtering]
 
-* link:/src/minimum-maximum-and-median-filters/README.adoc[Minimum, Maximum and Median Filter]
+* link:/src/minimum-maximum-and-median-filters/[Minimum, Maximum and Median Filter]
 
-* link:/src/alpha-blending/README.adoc[Alpha Blending]
+* link:/src/alpha-blending/[Alpha Blending]
 
-* link:/src/bit-plane-slicing/README.adoc[Bit Plane Slicing]
+* link:/src/bit-plane-slicing/[Bit Plane Slicing]
 
-* link:/src/intensity-level-slicing/README.adoc[Intensity Level Slicing]
+* link:/src/intensity-level-slicing/[Intensity Level Slicing]
 
-* link:/src/morphological-transformations/README.adoc[Morphological Transformations]
+* link:/src/morphological-transformations/[Morphological Transformations]
 
-* link:/src/log-transformation/README.adoc[Log Transformation]
+* link:/src/log-transformation/[Log Transformation]
 
-* link:/src/negation/README.adoc[Negative Transformation]
+* link:/src/negation/[Negative Transformation]
 
-* link:/src/detect-edge-using-canny-sobel-prewitt/README.adoc[Canny, Sobel and Prewitt]
+* link:/src/detect-edge-using-canny-sobel-prewitt/[Canny, Sobel and Prewitt]
 
-* link:/src/line-detection/README.adoc[Line Detection]
+* link:/src/line-detection/[Line Detection]
 
-* link:/src/ringing-artifacts/README.adoc[Ringing Artifacts]
+* link:/src/ringing-artifacts/[Ringing Artifacts]
 
-* link:/src/MSE-PSNR-SNR/README.adoc[Calculate MSE, SNR and PSNR]
+* link:/src/MSE-PSNR-SNR/[Calculate MSE, SNR and PSNR]
 
-* link:/src/anisotropic-diffusion/README.adoc[Anisotropic Diffusion]
+* link:/src/anisotropic-diffusion/[Anisotropic Diffusion]
 
-* link:/src/weber-ratio/README.adoc[Use of Weber’s Ratio]
+* link:/src/weber-ratio/[Use of Weber’s Ratio]
 

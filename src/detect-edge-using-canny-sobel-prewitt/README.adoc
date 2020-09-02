@@ -2,11 +2,12 @@
 :Email:     <opendoor.arafat[at]gmail[dot]com>
 :Date:      August 29, 2020
 :Revision:  v1.0
-:sectnums:
-:toc: macro
-:toc-title: Table of Content 
-:toclevels: 3
-:doctype: book
+
+
+
+ 
+
+
 
 
 [[canny-sobel-and-prewitt]]
