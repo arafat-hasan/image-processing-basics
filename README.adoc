@@ -3,6 +3,7 @@
 :Date:      August 29, 2020
 :Revision:  v1.0
 :sectnums:
+:gitrepo: https://github.com/arafat-hasan/oh-my-image-processing-course
 :toc: macro
 :toc-title: Table of Content 
 :toclevels: 3
@@ -13,51 +14,51 @@ Image Processing Course
 =======================
 
 
-include::src/addition/README.adoc
+include::src/addition/README.adoc[]
 
-include::src/bit-plane-slicing/README.adoc
+include::src/bit-plane-slicing/README.adoc[]
 
-include::src/gaussian-filter/README.adoc
+include::src/gaussian-filter/README.adoc[]
 
-include::src/minimum-maximum-and-median-filters/README.adoc
+include::src/minimum-maximum-and-median-filters/README.adoc[]
 
-include::src/reading-and-writing-of-color-image/README.adoc
+include::src/reading-and-writing-of-color-image/README.adoc[]
 
-include::src/alpha-blending/README.adoc
+include::src/alpha-blending/README.adoc[]
 
-include::src/brightness/README.adoc
+include::src/brightness/README.adoc[]
 
-include::src/intensity-level-slicing/README.adoc
+include::src/intensity-level-slicing/README.adoc[]
 
-include::src/morphological-transformations/README.adoc
+include::src/morphological-transformations/README.adoc[]
 
-include::src/RGB-to-gray-and-binary/README.adoc
+include::src/RGB-to-gray-and-binary/README.adoc[]
 
-include::src/anisotropic-diffusion/README.adoc
+include::src/anisotropic-diffusion/README.adoc[]
 
-include::src/contrast/README.adoc
+include::src/contrast/README.adoc[]
 
-include::src/MSE-PSNR-SNR/README.adoc
+include::src/MSE-PSNR-SNR/README.adoc[]
 
-include::src/ringing-artifacts/README.adoc
+include::src/ringing-artifacts/README.adoc[]
 
-include::src/average-filter/README.adoc
+include::src/average-filter/README.adoc[]
 
-include::src/detect-edge-using-canny-sobel-prewitt/README.adoc
+include::src/detect-edge-using-canny-sobel-prewitt/README.adoc[]
 
-include::src/line-detection/README.adoc
+include::src/line-detection/README.adoc[]
 
-include::src/multiplication/README.adoc
+include::src/multiplication/README.adoc[]
 
-include::src/use-of-subtraction/README.adoc
+include::src/use-of-subtraction/README.adoc[]
 
-include::src/basic-operations/README.adoc
+include::src/basic-operations/README.adoc[]
 
-include::src/division/README.adoc
+include::src/division/README.adoc[]
 
-include::src/log-transformation/README.adoc
+include::src/log-transformation/README.adoc[]
 
-include::src/negation/README.adoc
+include::src/negation/README.adoc[]
 
-include::src/weber-ratio/README.adoc
+include::src/weber-ratio/README.adoc[]
 
